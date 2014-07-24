@@ -62,7 +62,15 @@ public class Item {
     
     @Override
     public String toString() {
-    	return itemName;
+    	StringBuilder sb = new StringBuilder();
+    	String str;
+    	if(count == -1) {
+    		str = sb.append(itemName).append(" from ").append(store).append(" by ").append(date).toString();
+    	}
+    	else {
+    		str = sb.append(count).append(" ").append(itemName).append(" from ").append(store).append(" by ").append(date).toString();
+    	}
+    	return str;
     }
 }
 
