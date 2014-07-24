@@ -60,6 +60,12 @@ public class Item {
     	this.date = date;
     }
     
+    public void setDefault() {
+    	this.count = -1;
+    	this.store = "wherever";
+    	this.date = "whenever";  	
+    }
+    
     @Override
     public String toString() {
     	StringBuilder sb = new StringBuilder();
