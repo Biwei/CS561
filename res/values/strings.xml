@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Smart Shopper</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="button1">Add Item</string>
+    <string name="button2">Delete Selected Item</string>
+    <string name="title_activity_add_item">AddItemActivity</string>
+    <string name="textview_item_name">Item Name</string>
+    <string name="textview_item_count">Number</string>
+    <string name="textview_store_name">Where</string>
+    <string name="textview_deadline">Deadline</string>
+    <string name="button_add">Add</string>
+    <string name="CheckBox"/>
+    <string name="delete">delete</string>
+
+</resources>
