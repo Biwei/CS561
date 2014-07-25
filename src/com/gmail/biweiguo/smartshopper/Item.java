@@ -1,6 +1,8 @@
 package com.gmail.biweiguo.smartshopper;
 
-public class Item {
+import java.util.Comparator;
+
+public class Item implements Comparable<Item> {
 
     private String itemName;
     private int id;
@@ -78,5 +80,30 @@ public class Item {
     	}
     	return str;
     }
+    
+    public int compareTo(Item compareItem) {
+    	 
+		String compare = ((Item) compareItem).getStore(); 
+ 
+		//ascending order
+		return this.getStore().compareTo(compare);
+ 
+	}
+    
+	public static Comparator<Item> StoreComparator = new Comparator<Item>() {
+
+		public int compare(Item item1, Item item2) {
+
+			String store1 = item1.getStore().toUpperCase();
+			String store2 = item2.getStore().toUpperCase();
+
+			//ascending order
+			return store1.compareTo(store2);
+
+		}
+
+	};
+
+ 
 }
 

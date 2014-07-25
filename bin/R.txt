@@ -254,7 +254,6 @@ int id button_add 0x7f050048
 int id button_delete 0x7f05004b
 int id button_edit 0x7f05004c
 int id button_quick_add 0x7f05004a
-int id button_sort 0x7f05004d
 int id checkbox 0x7f05002d
 int id collapseActionView 0x7f05000d
 int id default_activity_button 0x7f050028
@@ -298,6 +297,7 @@ int id shortcut 0x7f05002e
 int id showCustom 0x7f050007
 int id showHome 0x7f050004
 int id showTitle 0x7f050006
+int id spinner_sort 0x7f05004d
 int id split_action_bar 0x7f05001e
 int id submit_area 0x7f050039
 int id tabMode 0x7f050002

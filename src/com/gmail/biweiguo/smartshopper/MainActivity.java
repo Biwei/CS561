@@ -1,6 +1,7 @@
 package com.gmail.biweiguo.smartshopper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.gmail.biweiguo.smartshopper.R;
@@ -24,11 +25,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class MainActivity extends ListActivity {
@@ -36,6 +40,7 @@ public class MainActivity extends ListActivity {
     protected static DbHelper db;
     ArrayList<Item> list;
     ArrayAdapter<Item> adapter;
+    private Spinner sortBy;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +49,14 @@ public class MainActivity extends ListActivity {
  
         /** Reference to the delete button of the layout main.xml */
         Button del = (Button) findViewById(R.id.button_delete);
+  
+        /** Prepare database */
         
         db = DbHelper.getInstance(this);
         list = db.getAllItems();
+        
+        addChoicesOnSpinner();
+        
         /** Defining the ArrayAdapter to set items to ListView */
         adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
         ListView listItem = (ListView) findViewById(android.R.id.list);
@@ -77,6 +87,7 @@ public class MainActivity extends ListActivity {
         del.setOnClickListener(listenerDel);
         
         listItem.setAdapter(adapter);
+        
     }
 
 	@Override
@@ -114,6 +125,20 @@ public class MainActivity extends ListActivity {
 		Intent intent = new Intent(this, AddItem.class);
 		startActivity(intent);
 	}
+	
+	public void addChoicesOnSpinner() {
+		 
+		sortBy = (Spinner) findViewById(R.id.spinner_sort);
+		List<String> choiceList = new ArrayList<String>();
+		choiceList.add("Nothing");
+		choiceList.add("Store");
+		choiceList.add("Deadline");
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+			android.R.layout.simple_spinner_item, choiceList);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		sortBy.setAdapter(dataAdapter);
+		sortBy.setOnItemSelectedListener(new MyOnItemSelectedListener());
+	}
 
 
 	@Override
@@ -125,4 +150,53 @@ public class MainActivity extends ListActivity {
         ListView updatedListTask = (ListView) findViewById(android.R.id.list);
         updatedListTask.setAdapter(adapter);
     }
+	
+	public void sortByNothing() {
+		
+		list = db.getAllItems();
+		adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
+		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
+        updatedListTask.setAdapter(adapter);
+		
+	}
+	
+	public void sortByStore() {
+		
+		Collections.sort(list, Item.StoreComparator);
+		adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
+		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
+        updatedListTask.setAdapter(adapter);
+		
+	}
+	
+	public void sortByDeadline() {
+		
+	}
+	
+	public class MyOnItemSelectedListener implements OnItemSelectedListener {
+	    @Override
+		    public void onItemSelected(AdapterView parent, View view, int pos, long id) {
+	    	
+	    		String choice = parent.getItemAtPosition(pos).toString();
+	    		switch(choice) {
+	    			case "Store":
+	    				sortByStore();
+	    				break;
+	    			case "Deadline":
+	    				sortByDeadline();
+	    				break;
+	    			default:
+	    				break;
+	    		}
+	    				
+    			
+		        Toast.makeText(parent.getContext(), "Selected choice : " + choice, Toast.LENGTH_SHORT).show();
+		    
+	    	}
+		 
+		    @Override
+		    public void onNothingSelected(AdapterView parent) {
+		 
+		    }
+		}
 }
