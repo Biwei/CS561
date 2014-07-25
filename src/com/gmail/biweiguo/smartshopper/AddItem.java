@@ -47,8 +47,8 @@ public class AddItem extends Activity {
 		EditText editName = (EditText) findViewById(R.id.textedit_item_name);
 		String name = editName.getText().toString();
 		
-		EditText editCount = (EditText) findViewById(R.id.textedit_item_count);
-		int count = Integer.parseInt(editCount.getText().toString());
+		//EditText editCount = (EditText) findViewById(R.id.textedit_item_count);
+		//int count = Integer.parseInt(editCount.getText().toString());
 		
 		EditText editStore = (EditText) findViewById(R.id.textedit_store_name);
 		String store = editStore.getText().toString();
@@ -57,7 +57,7 @@ public class AddItem extends Activity {
 		String date = editDate.getText().toString();
 		
 		newItem.setItemName(name);
-		newItem.setCount(count);
+		//newItem.setCount(count);
 		newItem.setStore(store);
 		newItem.setDate(date);
 		

@@ -22,7 +22,7 @@ public class DbHelper extends SQLiteOpenHelper {
     // tasks Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
-    private static final String KEY_COUNT = "count";
+    //private static final String KEY_COUNT = "count";
     private static final String KEY_STORE = "store";
     private static final String KEY_DATE = "deadline";
     
@@ -47,7 +47,6 @@ public class DbHelper extends SQLiteOpenHelper {
 		String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_ITEMS + " ( "
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + KEY_NAME + " TEXT, "
-                + KEY_COUNT + " INTEGER, "
                 + KEY_STORE + " TEXT, "
                 + KEY_DATE + " TEXT)";
         db.execSQL(sql);
@@ -66,7 +65,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 		ContentValues values = new ContentValues();
 		values.put(KEY_NAME, item.getItemName()); // item name
-		values.put(KEY_COUNT, item.getCount()); // number of item
+		//values.put(KEY_COUNT, item.getCount()); // number of item
 		values.put(KEY_STORE, item.getStore()); // where to buy
 		values.put(KEY_DATE, item.getDate()); // purchase deadline
 
@@ -95,9 +94,9 @@ public class DbHelper extends SQLiteOpenHelper {
 		Item item = new Item();
 		item.setId(cursor.getInt(0));
 		item.setItemName(cursor.getString(1));
-		item.setCount(cursor.getInt(2));
-		item.setStore(cursor.getString(3));
-		item.setDate(cursor.getString(4));
+		//item.setCount(cursor.getInt(2));
+		item.setStore(cursor.getString(2));
+		item.setDate(cursor.getString(3));
 		// Adding contact to list
 		itemList.add(item);
 		} while (cursor.moveToNext());
@@ -112,7 +111,7 @@ public class DbHelper extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 		
 		values.put(KEY_NAME, item.getItemName()); // item name
-		values.put(KEY_COUNT, item.getCount()); // number of item
+		//values.put(KEY_COUNT, item.getCount()); // number of item
 		values.put(KEY_STORE, item.getStore()); // where to buy
 		values.put(KEY_DATE, item.getDate()); // purchase deadline
 

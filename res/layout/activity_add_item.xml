@@ -28,34 +28,12 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
     </LinearLayout>
-
-    <LinearLayout
-    android:id="@+id/linearLayout_item_count"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/linearLayout_item_name"       
-    >
-    
-        <TextView
-            android:id="@+id/textview_item_count"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"            
-            android:text="@string/textview_item_count" />
-        
-       <EditText
-            android:id="@+id/textedit_item_count"
-            android:inputType="number"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    
+  
     <LinearLayout
     android:id="@+id/linearLayout_store_name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/linearLayout_item_count"       
+    android:layout_below="@+id/linearLayout_item_name"       
     >
     
         <TextView

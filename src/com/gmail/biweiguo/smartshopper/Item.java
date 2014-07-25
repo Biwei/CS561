@@ -6,15 +6,17 @@ public class Item implements Comparable<Item> {
 
     private String itemName;
     private int id;
-    private int count;
+    //private int count;
     private String store;
     private String date;
+    private float price;
     
     public Item()
     {
-        this.itemName=null;
+        this.itemName = null;
         this.store = null;
         this.date = null;
+        this.price = 0;
     }
     
     public Item(String itemName) {
@@ -38,6 +40,7 @@ public class Item implements Comparable<Item> {
         this.itemName = itemName;
     }
     
+ /*  I don't think count is that necessary 
     public int getCount() {
         return count;
     }
@@ -45,7 +48,16 @@ public class Item implements Comparable<Item> {
     public void setCount(int count) {
     	this.count = count;
     }
-
+*/
+    
+    public float getPrice() {
+        return price;
+    }
+    
+    public void setPrice(float price) {
+    	this.price = price;
+    }
+    
     public String getStore() {
     	return store;   	
     }
@@ -63,21 +75,18 @@ public class Item implements Comparable<Item> {
     }
     
     public void setDefault() {
-    	this.count = -1;
+    	//this.count = -1;
     	this.store = "wherever";
     	this.date = "whenever";  	
+    	
     }
     
     @Override
     public String toString() {
     	StringBuilder sb = new StringBuilder();
     	String str;
-    	if(count == -1) {
-    		str = sb.append(itemName).append(" from ").append(store).append(" by ").append(date).toString();
-    	}
-    	else {
-    		str = sb.append(count).append(" ").append(itemName).append(" from ").append(store).append(" by ").append(date).toString();
-    	}
+
+    	str = sb.append(itemName).append(" from ").append(store).append(" by ").append(date).toString();
     	return str;
     }
     
