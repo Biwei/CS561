@@ -70,7 +70,7 @@ public class AddItem extends Activity {
                     Toast.LENGTH_LONG).show();
         } else {
             MainActivity.db.addItem(newItem);
-            Log.d("my list", "data added");
+            Log.d("items", "data added");
         }
         
         //finish();

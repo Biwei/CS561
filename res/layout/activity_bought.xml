@@ -8,38 +8,7 @@
 	android:paddingRight="@dimen/activity_horizontal_margin"
 	android:paddingTop="@dimen/activity_vertical_margin"
 	android:orientation="vertical" >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1" >
-
-    	<EditText
-        	android:id="@+id/text_quick_add"
-        	android:layout_width="0dp"
-        	android:layout_height="wrap_content"
-       	 	android:layout_margin="0dp"
-        	android:layout_weight="0.4" />
-
-    	<Button
-    	    android:id="@+id/button_quick_add"
-    	    android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"
-    	    android:layout_weight="0.3"
-    	    android:text="@string/quick_add"
-    	    android:onClick="quickAddButtonPressed"
-    	    android:textSize="12sp" />
-    	
-    	<Spinner
-    	    android:id="@+id/spinner_sort"
-    	    android:layout_width="64dp"
-    	    android:textSize="12sp"
-    	    android:layout_weight="0.3"
-    	    android:layout_height="match_parent" />
-
-    </LinearLayout>
-    
+  
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,16 +16,16 @@
         android:weightSum="1" >
 
     	<Button
-    	    android:id="@+id/button_add"
+    	    android:id="@+id/button_edit_price"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:layout_weight="0.25"
     	    android:onClick="addButtonPressed"
-    	    android:text="@string/button1"
+    	    android:text="@string/button_edit_price"
     	    android:textSize="12sp" />
 
     	<Button
-    	    android:id="@+id/button_delete"
+    	    android:id="@+id/button_delete_bought"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:layout_weight="0.25"
@@ -64,19 +33,19 @@
     	    android:textSize="12sp" />
     
     	<Button
-    	    android:id="@+id/button_edit"
+    	    android:id="@+id/button_clear"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:layout_weight="0.25"
-    	    android:text="@string/button3"
+    	    android:text="@string/button_clear"
     	    android:textSize="12sp" />
 
     	<Button
-    	    android:id="@+id/button_bought"
+    	    android:id="@+id/button_back"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:layout_weight="0.25"
-    	    android:text="@string/button4"
+    	    android:text="@string/button_back"
     	    android:textSize="12sp" />
 
      </LinearLayout>

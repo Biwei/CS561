@@ -49,7 +49,7 @@ public class MainActivity extends ListActivity {
  
         /** Reference to the delete button of the layout main.xml */
         Button del = (Button) findViewById(R.id.button_delete);
-  
+        Button bought = (Button)findViewById(R.id.button_bought);
         /** Prepare database */
         
         db = DbHelper.getInstance(this);
@@ -68,10 +68,11 @@ public class MainActivity extends ListActivity {
                 /** Getting the checked items from the listview */
                 SparseBooleanArray checkedItemPositions = getListView().getCheckedItemPositions();
                 int itemCount = getListView().getCount();
-                Item selected = new Item ();
+                
  
                 for(int i=itemCount-1; i >= 0; i--){
                     if(checkedItemPositions.get(i)){
+                    	Item selected = new Item ();
                     	selected = list.get(i);
                         adapter.remove(selected);
                         db.removeItem(selected.getId());
@@ -85,6 +86,32 @@ public class MainActivity extends ListActivity {
  
         /** Setting the event listener for the delete button */
         del.setOnClickListener(listenerDel);
+
+        /** Defining a click event listener for the button "Bought" */
+        OnClickListener listenerBought = new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /** Getting the checked items from the listview */
+                SparseBooleanArray checkedItemPositions = getListView().getCheckedItemPositions();
+                int itemCount = getListView().getCount();
+                Item selected = new Item ();
+ 
+                for(int i=itemCount-1; i >= 0; i--){
+                    if(checkedItemPositions.get(i)){
+                    	selected = list.get(i);
+                        adapter.remove(selected);
+                        db.recordPurchase(selected.getId());
+                    }
+                }
+                checkedItemPositions.clear();
+                adapter.notifyDataSetChanged();
+                goToBought(v);
+            }
+        };
+ 
+ 
+        /** Setting the event listener for the delete button */
+        bought.setOnClickListener(listenerBought);
         
         listItem.setAdapter(adapter);
         
@@ -123,6 +150,14 @@ public class MainActivity extends ListActivity {
 	public void addButtonPressed(View view) {
 	    // Do something in response to button
 		Intent intent = new Intent(this, AddItem.class);
+		startActivity(intent);
+	}
+	
+	public void goToBought(View view) {
+		
+		Intent intent =  new Intent(this, BoughtActivity.class);
+		
+		
 		startActivity(intent);
 	}
 	
