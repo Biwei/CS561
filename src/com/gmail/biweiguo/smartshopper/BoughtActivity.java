@@ -3,9 +3,11 @@ package com.gmail.biweiguo.smartshopper;
 import java.util.ArrayList;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -44,5 +46,11 @@ public class BoughtActivity extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void backButtonPressed(View view) {
+	    // Do something in response to button
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
 	}
 }

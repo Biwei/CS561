@@ -21,5 +21,7 @@
     <string name="button_clear">Clear</string>
     <string name="button_back">Back</string>
     <string name="title_activity_bought">BoughtActivity</string>
+    <string name="button_back_to_shop">Back To Shopping List</string>
+    <string name="button_to_bought">Go To Purchase Record</string>
 
 </resources>

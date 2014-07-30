@@ -9,6 +9,14 @@
 	android:paddingTop="@dimen/activity_vertical_margin"
 	android:orientation="vertical" >
 
+    <Button
+        android:id="@+id/button_to_bought"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:onClick="goToBought"
+        android:text="@string/button_to_bought"
+        android:textSize="12sp" />
+        
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
