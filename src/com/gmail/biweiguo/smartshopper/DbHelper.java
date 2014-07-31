@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 public class DbHelper extends SQLiteOpenHelper {
 	
@@ -82,7 +83,7 @@ public class DbHelper extends SQLiteOpenHelper {
 	//Table items related methods:
 	public void addItem(Item item) {
 		SQLiteDatabase db = this.getWritableDatabase();
-
+		
 		ContentValues values = new ContentValues();
 		values.put(KEY_NAME, item.getItemName()); // item name
 		//values.put(KEY_COUNT, item.getCount()); // number of item
@@ -91,6 +92,7 @@ public class DbHelper extends SQLiteOpenHelper {
 		//values.put(KEY_PRICE, item.getPrice()); //purchase price
 		// Inserting Row
 		db.insert(TABLE_ITEMS, null, values);
+
 		db.close(); // Closing database connection
 		}
 	
@@ -139,6 +141,34 @@ public class DbHelper extends SQLiteOpenHelper {
 		db.update(TABLE_ITEMS, values, KEY_ID + " = ?",
 		new String[]{String.valueOf(item.getId())});
 		}
+	
+	public Item getItemByName(String name) {
+		
+		SQLiteDatabase db = this.getReadableDatabase();
+		 
+	    String selectQuery = "SELECT  * FROM " + TABLE_ITEMS + " WHERE "
+	            + KEY_NAME + " = " + name;
+	 
+	    Log.e("items", "data selected");
+	 
+	    Cursor cursor = db.rawQuery(selectQuery, null);
+	    Item item;
+	 
+	    if (cursor != null) {
+            cursor.moveToFirst();
+			item = new Item();
+		    item.setId(cursor.getInt(0));
+		    item.setItemName(cursor.getString(1));
+		    item.setStore(cursor.getString(2));
+		    item.setDate(cursor.getString(3));
+		    //item.setPrice(curcor.getFloat(cursor.getColumnIndex(KEY_PRICE)));
+		    
+		    return item;
+	    }
+	    else
+	    	return null;
+			
+	}
 
 
 	//purchase table related methods:
@@ -211,6 +241,16 @@ public class DbHelper extends SQLiteOpenHelper {
 	    removeItem(id);
 	    addPurchase(item);      
 	}
+	
+	public void removeBoughtItem(long id) {
+		
+		SQLiteDatabase db = this.getWritableDatabase();
+        //String string =String.valueOf(id);
+        db.execSQL("DELETE FROM " + TABLE_BOUGHT + " WHERE id = '" + id + "'");
+        Log.d("bought ", id + " deleted");
+        db.close();
+    }
+	
 }
 
 

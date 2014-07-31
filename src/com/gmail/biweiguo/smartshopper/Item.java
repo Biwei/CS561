@@ -83,14 +83,16 @@ public class Item implements Comparable<Item> {
     
     @Override
     public String toString() {
-    	/*
+    	
     	StringBuilder sb = new StringBuilder();
     	String str;
 
     	str = sb.append(itemName).append(" from ").append(store).append(" by ").append(date).toString();
-    	return str;
-    	*/
-    	return itemName;
+    	if(store.equals("wherever") && date.equals("whenever"))
+    		return itemName;
+    	else
+    		return str;
+
     }
     
     public int compareTo(Item compareItem) {

@@ -3,15 +3,19 @@ package com.gmail.biweiguo.smartshopper;
 import java.util.ArrayList;
 
 import android.support.v7.app.ActionBarActivity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
-public class BoughtActivity extends ActionBarActivity {
+public class BoughtActivity extends ListActivity  {
 	
     ArrayList<Item> list;
     ArrayAdapter<Item> adapter;
@@ -26,6 +30,30 @@ public class BoughtActivity extends ActionBarActivity {
         adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
         ListView listItem = (ListView) findViewById(android.R.id.list);
         listItem.setAdapter(adapter);
+        
+        Button del = (Button) findViewById(R.id.button_delete_bought);
+        OnClickListener listenerDel = new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /** Getting the checked items from the listview */
+                SparseBooleanArray checkedItemPositions = getListView().getCheckedItemPositions();
+                int itemCount = getListView().getCount();
+                
+ 
+                for(int i=itemCount-1; i >= 0; i--){
+                    if(checkedItemPositions.get(i)){
+                    	Item selected = new Item ();
+                    	selected = list.get(i);
+                        adapter.remove(selected);
+                        db.removeBoughtItem(selected.getId());
+                    }
+                }
+                checkedItemPositions.clear();
+                adapter.notifyDataSetChanged();
+            }
+        };
+        del.setOnClickListener(listenerDel);
+        
 	}
 
 /*	@Override
