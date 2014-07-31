@@ -26,9 +26,9 @@ public class Item implements Comparable<Item> {
     
     public void setDefault() {
     	
-    	if(store == null)
+    	if(store.equals("") || store == null)
     		this.store = "wherever";
-    	if(date == null)
+    	if(date.equals("") || date == null)
     		this.date = "whenever";
     }
     

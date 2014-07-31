@@ -45,8 +45,8 @@ public class DbHelper extends SQLiteOpenHelper {
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "	//column 0	
             + KEY_NAME + " TEXT, "								//column 1
             + KEY_STORE + " TEXT, "								//column 2	
-            + KEY_PRICE + " FLOAT, "							//column 3	
-            + KEY_DATE + " TEXT)";								//column 4
+            + KEY_DATE + " TEXT, "								//column 3	
+            + KEY_PRICE + " FLOAT)";							//column 4
     
     public static DbHelper getInstance(Context context) {
 
