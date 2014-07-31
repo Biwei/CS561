@@ -131,13 +131,18 @@ public class MainActivity extends ListActivity {
 		
 		EditText editName = (EditText) findViewById(R.id.text_quick_add);
 		String name = editName.getText().toString();
+		Item newItem;
 			
 		if (name.equalsIgnoreCase("")) {
             Toast.makeText(this, "enter the item name at least!!",
                     Toast.LENGTH_LONG).show();
-        } else {
-        	Item newItem = new Item(name);
-    		newItem.setDefault();
+        } 
+		else if (db.getItemByName(name) != null) {
+        	Toast.makeText(this, "item already exists!" , Toast.LENGTH_LONG).show();
+        }
+		else {
+        	newItem = new Item(name);
+        	newItem.setDefault();
             db.addItem(newItem);
             Log.d("my list", "data added");
             editName.setText("");

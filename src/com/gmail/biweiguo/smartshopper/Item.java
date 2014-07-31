@@ -24,6 +24,14 @@ public class Item implements Comparable<Item> {
         this.itemName = itemName;
     }
     
+    public void setDefault() {
+    	
+    	if(store == null)
+    		this.store = "wherever";
+    	if(date == null)
+    		this.date = "whenever";
+    }
+    
     public int getId() {
         return id;
     }
@@ -72,13 +80,6 @@ public class Item implements Comparable<Item> {
     
     public void setDate (String date) {
     	this.date = date;
-    }
-    
-    public void setDefault() {
-    	//this.count = -1;
-    	this.store = "wherever";
-    	this.date = "whenever";  	
-    	
     }
     
     @Override

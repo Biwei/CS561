@@ -93,6 +93,11 @@ public class DbHelper extends SQLiteOpenHelper {
 		// Inserting Row
 		db.insert(TABLE_ITEMS, null, values);
 
+		Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
+		cursor.moveToFirst();
+		int id = cursor.getInt(0);
+		item.setId(id);
+	    
 		db.close(); // Closing database connection
 		}
 	
@@ -147,15 +152,14 @@ public class DbHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		 
 	    String selectQuery = "SELECT  * FROM " + TABLE_ITEMS + " WHERE "
-	            + KEY_NAME + " = " + name;
+	            + KEY_NAME + " = '" + name + "'";
 	 
 	    Log.e("items", "data selected");
 	 
 	    Cursor cursor = db.rawQuery(selectQuery, null);
 	    Item item;
 	 
-	    if (cursor != null) {
-            cursor.moveToFirst();
+	    if (cursor.moveToFirst())  {
 			item = new Item();
 		    item.setId(cursor.getInt(0));
 		    item.setItemName(cursor.getString(1));

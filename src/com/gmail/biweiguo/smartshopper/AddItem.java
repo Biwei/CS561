@@ -64,11 +64,16 @@ public class AddItem extends Activity {
 		//newItem.setCount(count);
 		newItem.setStore(store);
 		newItem.setDate(date);
+		newItem.setDefault();
 		
         if (name.equalsIgnoreCase("")) {
             Toast.makeText(this, "enter the item name at least!!",
                     Toast.LENGTH_LONG).show();
-        } else {
+        } 
+        else if (db.getItemByName(name) != null) {
+        	Toast.makeText(this, "item already exists!" , Toast.LENGTH_LONG).show();
+        }
+        else {
             MainActivity.db.addItem(newItem);
             Log.d("items", "data added");
         }
