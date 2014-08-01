@@ -10,6 +10,7 @@ import android.util.Log;
 public class Item implements Comparable<Item> {
 
 	private static final String defaultString = "01/01/2114"; //a remote day
+	private static boolean mode = false; //false for hiding details in toString.
     private String itemName;
     private int id;
     //private int count;
@@ -124,17 +125,35 @@ public class Item implements Comparable<Item> {
     	
     	StringBuilder sb = new StringBuilder();
     	String str;
-
-    	str = sb.append(itemName).append(" from ").append(store).append(" by ").append(dateString).toString();
-    	if(store.equals("wherever") && dateString.equals(defaultString))
-    		return itemName;
-    	else if(dateString.equals(defaultString))
-    		return sb.append(itemName).append(" from ").append(store).toString();
-    	else if(store.equals("wherever"))
-    		return sb.append(itemName).append(dateString).toString();
-    	else
-    		return str;
-
+    	
+    	if(price == 0) {
+	    	if(!mode) {
+	    		if(dateString.equals(defaultString)) {
+	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append("whenever").toString();
+	    		}
+	    		else
+	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append(dateString).toString();
+	    	}
+	    	else
+	    		str = itemName;
+    	}
+    	else {
+    		if(!mode) {
+	    		if(dateString.equals(defaultString)) {
+	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append("whenever").
+	    					append(", price = $ ").append(price).toString();
+	    		}
+	    		else
+	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append(dateString).
+	    			append(", price = $ ").append(price).toString();
+	    	}
+	    	else
+	    		str = sb.append(itemName).append(", price = $ ").append(price).toString();		
+    	}
+    	
+    	return str;
+    		
+    	
     }
     
     public int compareTo(Item compareItem) {
