@@ -72,6 +72,7 @@ public class EditItem extends Activity {
 		//newItem.setCount(count);
 		newItem.setStore(store);
 		newItem.setDate(date);
+		newItem.setId(id);
 		newItem.setDefault();
 		
         if (name.equalsIgnoreCase("")) {
