@@ -152,17 +152,47 @@ public class MainActivity extends ListActivity {
 		
 	}
 	
-	public void addButtonPressed(View view) {
+	public void addButtonPressed (View view) {
 	    // Do something in response to button
 		Intent intent = new Intent(this, AddItem.class);
 		startActivity(intent);
 	}
 	
-	public void goToBought(View view) {
+	public void editButtonPressed (View view) {
+		SparseBooleanArray checkedItemPositions = getListView().getCheckedItemPositions();
+        int itemCount = getListView().getCount();
+        int numberSelected = 0;
+        int idSelected = 0;
+        Item selected = new Item ();
+
+        for(int i=itemCount-1; i >= 0; i--){
+            if(checkedItemPositions.get(i)){
+            	numberSelected++;
+            }
+        }
+        //
+        if(numberSelected == 0) {
+        	Toast.makeText(this, "You have to select an item for editing!", Toast.LENGTH_LONG).show();
+        }
+        else if(numberSelected > 1) {
+        	Toast.makeText(this, "You can only edit one item at a time!", Toast.LENGTH_LONG).show();
+        }
+        else {
+        	for(int i=itemCount-1; i >= 0; i--){
+                if(checkedItemPositions.get(i)){
+                	selected = list.get(i);
+                	idSelected = selected.getId();
+                }
+            }
+        	Intent intent = new Intent(this, EditItem.class);
+        	intent.putExtra("selected", idSelected);
+        	startActivity(intent);
+        }
+	}
+	
+	public void goToBought (View view) {
 		
-		Intent intent =  new Intent(this, BoughtActivity.class);
-		
-		
+		Intent intent =  new Intent(this, BoughtActivity.class);	
 		startActivity(intent);
 	}
 	

@@ -31,6 +31,10 @@
             android:name=".BoughtActivity"
             android:label="@string/title_activity_bought" >
         </activity>
+        <activity
+            android:name=".EditItem"
+            android:label="@string/title_activity_edit_item" >
+        </activity>
     </application>
 
 </manifest>

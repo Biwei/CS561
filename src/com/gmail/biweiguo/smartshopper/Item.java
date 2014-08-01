@@ -13,22 +13,25 @@ public class Item implements Comparable<Item> {
     
     public Item()
     {
-        this.itemName = null;
-        this.store = null;
-        this.date = null;
+        this.itemName = "";
+        this.store = "";
+        this.date = "";
         this.price = 0;
     }
     
     public Item(String itemName) {
         super();
         this.itemName = itemName;
+        this.store = "";
+        this.date = "";
+        this.price = 0;
     }
     
     public void setDefault() {
     	
-    	if(store.equals("") || store == null)
+    	if(store.equals(""))
     		this.store = "wherever";
-    	if(date.equals("") || date == null)
+    	if(date.equals(""))
     		this.date = "whenever";
     }
     
