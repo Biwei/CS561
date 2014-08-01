@@ -12,7 +12,7 @@
     <string name="textview_item_name">Item Name</string>
     <string name="textview_item_count">Number</string>
     <string name="textview_store_name">Where</string>
-    <string name="textview_deadline">Deadline</string>
+    <string name="textview_deadline">Deadline (MM/DD/YYYY)</string>
     <string name="button_add">Add</string>
     <string name="CheckBox" />
     <string name="delete">delete</string>

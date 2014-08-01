@@ -3,6 +3,7 @@ package com.gmail.biweiguo.smartshopper;
 import com.gmail.biweiguo.smartshopper.Item;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -88,7 +89,7 @@ public class DbHelper extends SQLiteOpenHelper {
 		values.put(KEY_NAME, item.getItemName()); // item name
 		//values.put(KEY_COUNT, item.getCount()); // number of item
 		values.put(KEY_STORE, item.getStore()); // where to buy
-		values.put(KEY_DATE, item.getDate()); // purchase deadline
+		values.put(KEY_DATE, item.getDateString()); // purchase deadline
 		//values.put(KEY_PRICE, item.getPrice()); //purchase price
 		// Inserting Row
 		db.insert(TABLE_ITEMS, null, values);
@@ -124,7 +125,7 @@ public class DbHelper extends SQLiteOpenHelper {
 		item.setItemName(cursor.getString(1));
 		//item.setCount(cursor.getInt(2));
 		item.setStore(cursor.getString(2));
-		item.setDate(cursor.getString(3));
+		item.setDateString(cursor.getString(3));
 		// Adding contact to list
 		itemList.add(item);
 		} while (cursor.moveToNext());
@@ -141,7 +142,7 @@ public class DbHelper extends SQLiteOpenHelper {
 		values.put(KEY_NAME, item.getItemName()); // item name
 		//values.put(KEY_COUNT, item.getCount()); // number of item
 		values.put(KEY_STORE, item.getStore()); // where to buy
-		values.put(KEY_DATE, item.getDate()); // purchase deadline
+		values.put(KEY_DATE, item.getDateString()); // purchase deadline
 
 		db.update(TABLE_ITEMS, values, KEY_ID + " = ?",
 		new String[]{String.valueOf(item.getId())});
@@ -164,7 +165,9 @@ public class DbHelper extends SQLiteOpenHelper {
 		    item.setId(cursor.getInt(0));
 		    item.setItemName(cursor.getString(1));
 		    item.setStore(cursor.getString(2));
-		    item.setDate(cursor.getString(3));
+		    item.setDateString(cursor.getString(3));
+		    Date date = Item.parseDate(item.getDateString());
+		    item.setDate(date);
 		    //item.setPrice(curcor.getFloat(cursor.getColumnIndex(KEY_PRICE)));
 		    
 		    return item;
@@ -194,7 +197,9 @@ public class DbHelper extends SQLiteOpenHelper {
 	    item.setId(cursor.getInt(0));
 	    item.setItemName(cursor.getString(1));
 	    item.setStore(cursor.getString(2));
-	    item.setDate(cursor.getString(3));
+	    item.setDateString(cursor.getString(3));
+	    Date date = Item.parseDate(item.getDateString());
+	    item.setDate(date);
 	    //item.setPrice(curcor.getFloat(cursor.getColumnIndex(KEY_PRICE)));
 	    
 	    return item;
@@ -215,7 +220,9 @@ public class DbHelper extends SQLiteOpenHelper {
 		item.setItemName(cursor.getString(1));
 		//item.setCount(cursor.getInt(2));
 		item.setStore(cursor.getString(2));
-		item.setDate(cursor.getString(3));
+	    item.setDateString(cursor.getString(3));
+	    Date date = Item.parseDate(item.getDateString());
+	    item.setDate(date);
 		// Adding contact to list
 		itemList.add(item);
 		} while (cursor.moveToNext());
@@ -232,7 +239,7 @@ public class DbHelper extends SQLiteOpenHelper {
 		values.put(KEY_NAME, item.getItemName()); // item name
 		//values.put(KEY_COUNT, item.getCount()); // number of item
 		values.put(KEY_STORE, item.getStore()); // where to buy
-		values.put(KEY_DATE, item.getDate()); // purchase deadline
+		values.put(KEY_DATE, item.getDateString()); // purchase deadline
 		values.put(KEY_PRICE, item.getPrice()); //purchase price
 		// Inserting Row
 		db.insert(TABLE_BOUGHT, null, values);

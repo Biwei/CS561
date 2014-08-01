@@ -1,21 +1,44 @@
 package com.gmail.biweiguo.smartshopper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
+import java.util.Date;
+
+import android.util.Log;
 
 public class Item implements Comparable<Item> {
 
+	private static final String defaultString = "01/01/2114"; //a remote day
     private String itemName;
     private int id;
     //private int count;
     private String store;
-    private String date;
+    private String dateString;
+    private Date date;
     private float price;
+    
+    static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	private static final Date defaultDate = parseDate(defaultString);
+    
+    
+    public static Date parseDate (String str) {
+    	Date date = null;
+    	try {
+    		date = sdf.parse(str);
+    	}catch (ParseException e) {
+    		e.printStackTrace();
+    		Log.d("Item", "Can't format date!");
+    	}
+    	return date;
+    }
     
     public Item()
     {
         this.itemName = "";
         this.store = "";
-        this.date = "";
+        this.date = defaultDate;
+        this.dateString = defaultString;
         this.price = 0;
     }
     
@@ -23,7 +46,8 @@ public class Item implements Comparable<Item> {
         super();
         this.itemName = itemName;
         this.store = "";
-        this.date = "";
+        this.date = defaultDate;
+        this.dateString = defaultString;
         this.price = 0;
     }
     
@@ -31,8 +55,10 @@ public class Item implements Comparable<Item> {
     	
     	if(store.equals(""))
     		this.store = "wherever";
-    	if(date.equals(""))
-    		this.date = "whenever";
+    	if(dateString.equals("")) {
+    		setDateString(defaultString);
+    		setDate(defaultDate);
+    	}
     }
     
     public int getId() {
@@ -77,12 +103,20 @@ public class Item implements Comparable<Item> {
     	this.store = store;
     }
     
-    public String getDate() {
+    public Date getDate() {
     	return date;
     }
     
-    public void setDate (String date) {
+    public void setDate (Date date) {
     	this.date = date;
+    }
+    
+    public String getDateString() {
+    	return dateString;
+    }
+    
+    public void setDateString(String str) {
+    	this.dateString = str;
     }
     
     @Override
@@ -91,9 +125,13 @@ public class Item implements Comparable<Item> {
     	StringBuilder sb = new StringBuilder();
     	String str;
 
-    	str = sb.append(itemName).append(" from ").append(store).append(" by ").append(date).toString();
-    	if(store.equals("wherever") && date.equals("whenever"))
+    	str = sb.append(itemName).append(" from ").append(store).append(" by ").append(dateString).toString();
+    	if(store.equals("wherever") && dateString.equals(defaultString))
     		return itemName;
+    	else if(dateString.equals(defaultString))
+    		return sb.append(itemName).append(" from ").append(store).toString();
+    	else if(store.equals("wherever"))
+    		return sb.append(itemName).append(dateString).toString();
     	else
     		return str;
 
@@ -117,6 +155,20 @@ public class Item implements Comparable<Item> {
 
 			//ascending order
 			return store1.compareTo(store2);
+
+		}
+
+	};
+	
+	public static Comparator<Item> DateComparator = new Comparator<Item>() {
+
+		public int compare(Item item1, Item item2) {
+
+			Date date1 = item1.getDate();
+			Date date2 = item2.getDate();
+
+			//descending order
+			return date2.compareTo(date1);
 
 		}
 

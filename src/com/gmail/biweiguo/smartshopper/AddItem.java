@@ -1,5 +1,7 @@
 package com.gmail.biweiguo.smartshopper;
 
+import java.util.Date;
+
 import com.gmail.biweiguo.smartshopper.Item;
 import com.gmail.biweiguo.smartshopper.R;
 
@@ -58,11 +60,13 @@ public class AddItem extends Activity {
 		String store = editStore.getText().toString();
 		
 		EditText editDate = (EditText) findViewById(R.id.textedit_deadline);
-		String date = editDate.getText().toString();
+		String dateString = editDate.getText().toString();
+		Date date = Item.parseDate(dateString);
 		
 		newItem.setItemName(name);
 		//newItem.setCount(count);
 		newItem.setStore(store);
+		newItem.setDateString(dateString);
 		newItem.setDate(date);
 		newItem.setDefault();
 		

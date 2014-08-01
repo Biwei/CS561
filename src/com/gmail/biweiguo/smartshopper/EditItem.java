@@ -1,7 +1,10 @@
 package com.gmail.biweiguo.smartshopper;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -57,20 +60,25 @@ public class EditItem extends Activity {
 		
 		EditText editName = (EditText) findViewById(R.id.textedit_item_name1);
 		editName.setHint(oldItem.getItemName());
+		editName.setHintTextColor(Color.GRAY);
 		String name = editName.getText().toString();
 		
 		//EditText editCount = (EditText) findViewById(R.id.textedit_item_count);
 		//int count = Integer.parseInt(editCount.getText().toString());
 		
 		EditText editStore = (EditText) findViewById(R.id.textedit_store_name1);
+		editStore.setHint(oldItem.getStore());
+		editStore.setHintTextColor(Color.GRAY);
 		String store = editStore.getText().toString();
 		
 		EditText editDate = (EditText) findViewById(R.id.textedit_deadline1);
-		String date = editDate.getText().toString();
+		String dateString = editDate.getText().toString();
+		Date date = Item.parseDate(dateString);
 		
 		newItem.setItemName(name);
 		//newItem.setCount(count);
 		newItem.setStore(store);
+		newItem.setDateString(dateString);
 		newItem.setDate(date);
 		newItem.setId(id);
 		newItem.setDefault();
