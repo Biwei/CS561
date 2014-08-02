@@ -276,12 +276,14 @@ public class DbHelper extends SQLiteOpenHelper {
 	
 	public void addPurchase(Item item) {
 		SQLiteDatabase db = this.getWritableDatabase();
+        Date currentDate = new Date ();
+        String currentDateStr = Item.sdf.format(currentDate);
 
 		ContentValues values = new ContentValues();
 		values.put(KEY_NAME, item.getItemName()); // item name
 		//values.put(KEY_COUNT, item.getCount()); // number of item
 		values.put(KEY_STORE, item.getStore()); // where to buy
-		values.put(KEY_DATE, item.getDateString()); // purchase deadline
+		values.put(KEY_DATE, currentDateStr); // purchase date
 		values.put(KEY_PRICE, item.getPrice()); //purchase price
 		// Inserting Row
 		db.insert(TABLE_BOUGHT, null, values);
