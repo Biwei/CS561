@@ -33,11 +33,13 @@
         </activity>
         <activity
             android:name=".EditItem"
-            android:label="@string/title_activity_edit_item" >
+            android:label="@string/title_activity_edit_item" 
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
             android:name=".EditPrice"
-            android:label="@string/title_activity_edit_price" >
+            android:label="@string/title_activity_edit_price"
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
     </application>
 
