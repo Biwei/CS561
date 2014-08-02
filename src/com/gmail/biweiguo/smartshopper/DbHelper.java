@@ -206,6 +206,47 @@ public class DbHelper extends SQLiteOpenHelper {
 		//Didn't close database because the item may need to be added to the other table.
 	}
 	
+	public Item getPurchase(long id) {
+		
+		SQLiteDatabase db = this.getReadableDatabase();
+		 
+	    String selectQuery = "SELECT  * FROM " + TABLE_BOUGHT + " WHERE "
+	            + KEY_ID + " = " + id;
+	 
+	    Log.e("bought", "data selected");
+	 
+	    Cursor cursor = db.rawQuery(selectQuery, null);
+	    Item item;
+	 
+	    if (cursor != null)
+            cursor.moveToFirst();
+		item = new Item();
+	    item.setId(cursor.getInt(0));
+	    item.setItemName(cursor.getString(1));
+	    item.setStore(cursor.getString(2));
+	    item.setDateString(cursor.getString(3));
+	    Date date = Item.parseDate(item.getDateString());
+	    item.setDate(date);
+	    //item.setPrice(curcor.getFloat(cursor.getColumnIndex(KEY_PRICE)));
+	    
+	    return item;
+		//Didn't close database because the item may need to be added to the other table.
+	}
+	
+	public void updatePurchase(Item item) {
+		// updating row
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		
+		values.put(KEY_NAME, item.getItemName()); // item name
+		//values.put(KEY_COUNT, item.getCount()); // number of item
+		values.put(KEY_STORE, item.getStore()); // where to buy
+		values.put(KEY_DATE, item.getDateString()); // purchase deadline
+		values.put(KEY_PRICE, item.getPrice());//purchase price
+		db.update(TABLE_BOUGHT, values, KEY_ID + " = ?",
+		new String[]{String.valueOf(item.getId())});
+		}
+
 	public ArrayList<Item> getAllPurchases() {
 		ArrayList<Item> itemList = new ArrayList<Item>();
 		// Select All Query

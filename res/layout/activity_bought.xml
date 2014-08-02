@@ -28,7 +28,7 @@
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:layout_weight="0.25"
-    	    android:onClick="addButtonPressed"
+    	    android:onClick="editPriceButtonPressed"
     	    android:text="@string/button_edit_price"
     	    android:textSize="12sp" />
 

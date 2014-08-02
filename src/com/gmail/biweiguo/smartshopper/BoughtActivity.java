@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class BoughtActivity extends ListActivity  {
 	
@@ -76,9 +77,52 @@ public class BoughtActivity extends ListActivity  {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	public void editPriceButtonPressed (View view) {
+		SparseBooleanArray checkedItemPositions = getListView().getCheckedItemPositions();
+        int itemCount = getListView().getCount();
+        int numberSelected = 0;
+        int idSelected = 0;
+        Item selected = new Item ();
+
+        for(int i=itemCount-1; i >= 0; i--){
+            if(checkedItemPositions.get(i)){
+            	numberSelected++;
+            }
+        }
+        //
+        if(numberSelected == 0) {
+        	Toast.makeText(this, "You have to select an item for editing!", Toast.LENGTH_LONG).show();
+        }
+        else if(numberSelected > 1) {
+        	Toast.makeText(this, "You can only edit one item at a time!", Toast.LENGTH_LONG).show();
+        }
+        else {
+        	for(int i=itemCount-1; i >= 0; i--){
+                if(checkedItemPositions.get(i)){
+                	selected = list.get(i);
+                	idSelected = selected.getId();
+                }
+            }
+        	Intent intent = new Intent(this, EditPrice.class);
+        	intent.putExtra("selected", idSelected);
+        	startActivity(intent);
+        }
+	}
+	
+	
 	public void backButtonPressed(View view) {
 	    // Do something in response to button
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 	}
+	
+	@Override
+    public void onResume(){
+    super.onResume();
+        adapter.clear();
+        list = db.getAllPurchases();
+        adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
+        ListView updatedListTask = (ListView) findViewById(android.R.id.list);
+        updatedListTask.setAdapter(adapter);
+    }
 }

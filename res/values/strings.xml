@@ -26,5 +26,7 @@
     <string name="title_activity_edit_item">EditItem</string>
     <string name="button_save">Save</string>
     <string name="button_cancel">Cancel</string>
+    <string name="title_activity_edit_price">EditPrice</string>
+    <string name="textview_item_price">Price ($)</string>
 
 </resources>
