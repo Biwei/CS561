@@ -227,7 +227,7 @@ public class DbHelper extends SQLiteOpenHelper {
 	    item.setDateString(cursor.getString(3));
 	    Date date = Item.parseDate(item.getDateString());
 	    item.setDate(date);
-	    //item.setPrice(curcor.getFloat(cursor.getColumnIndex(KEY_PRICE)));
+	    item.setPrice(cursor.getFloat(cursor.getColumnIndex(KEY_PRICE)));
 	    
 	    return item;
 		//Didn't close database because the item may need to be added to the other table.
@@ -264,6 +264,7 @@ public class DbHelper extends SQLiteOpenHelper {
 	    item.setDateString(cursor.getString(3));
 	    Date date = Item.parseDate(item.getDateString());
 	    item.setDate(date);
+	    item.setPrice(cursor.getFloat(4));
 		// Adding contact to list
 		itemList.add(item);
 		} while (cursor.moveToNext());

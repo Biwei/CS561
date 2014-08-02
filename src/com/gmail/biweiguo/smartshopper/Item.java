@@ -126,18 +126,7 @@ public class Item implements Comparable<Item> {
     	StringBuilder sb = new StringBuilder();
     	String str;
     	
-    	if(price == 0) {
-	    	if(!mode) {
-	    		if(dateString.equals(defaultString)) {
-	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append("whenever").toString();
-	    		}
-	    		else
-	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append(dateString).toString();
-	    	}
-	    	else
-	    		str = itemName;
-    	}
-    	else {
+    	if(price != 0) {
     		if(!mode) {
 	    		if(dateString.equals(defaultString)) {
 	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append("whenever").
@@ -149,6 +138,17 @@ public class Item implements Comparable<Item> {
 	    	}
 	    	else
 	    		str = sb.append(itemName).append(", price = $ ").append(price).toString();		
+    	}
+    	else {
+	    	if(!mode) {
+	    		if(dateString.equals(defaultString)) {
+	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append("whenever").toString();
+	    		}
+	    		else
+	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append(dateString).toString();
+	    	}
+	    	else
+	    		str = itemName;
     	}
     	
     	return str;
