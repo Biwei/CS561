@@ -1,6 +1,7 @@
 package com.gmail.biweiguo.smartshopper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.ListActivity;
@@ -57,24 +58,28 @@ public class BoughtActivity extends ListActivity  {
         
 	}
 
-/*	@Override
+
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.bought, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);
 	}
-	*/
+
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+	    // Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.show_details1:
+	            showDetails();
+	            return true;
+	        case R.id.hide_details1:
+	            hideDetails();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+
 	}
 	
 	public void editPriceButtonPressed (View view) {
@@ -114,6 +119,28 @@ public class BoughtActivity extends ListActivity  {
 	    // Do something in response to button
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
+	}
+	
+	public void sortByDeadline() {
+		
+		Collections.sort(list, Item.DateComparator);
+		adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
+		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
+        updatedListTask.setAdapter(adapter);		
+	}
+	
+	public void hideDetails() {
+		Item.hideDetails();
+		onResume();
+	}
+	
+	public void showDetails() {
+		Item.showDetails();
+		onResume();
+	}
+	
+	public void noSort(){
+		onResume();
 	}
 	
 	@Override

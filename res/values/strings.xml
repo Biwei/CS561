@@ -15,7 +15,6 @@
     <string name="textview_deadline">Deadline (MM/DD/YYYY)</string>
     <string name="button_add">Add</string>
     <string name="CheckBox" />
-    <string name="delete">delete</string>
     <string name="quick_add">Quick Add</string>
     <string name="button_edit_price">Edit Price</string>
     <string name="button_clear">Clear</string>
@@ -28,5 +27,9 @@
     <string name="button_cancel">Cancel</string>
     <string name="title_activity_edit_price">EditPrice</string>
     <string name="textview_item_price">Price ($)</string>
+    <string name="show_details">Show Details</string>
+    <string name="hide_details">Hide Details</string>
+    <string name="sort_by_deadline">Sort By Deadline</string>
+    <string name="no_sort">No Sort</string>
 
 </resources>

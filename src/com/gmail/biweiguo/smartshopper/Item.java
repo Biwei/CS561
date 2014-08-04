@@ -120,6 +120,14 @@ public class Item implements Comparable<Item> {
     	this.dateString = str;
     }
     
+    public static void hideDetails () {
+    	mode = true;
+    }
+    
+    public static void showDetails() {
+    	mode = false;
+    }
+    
     @Override
     public String toString() {
     	
@@ -137,7 +145,7 @@ public class Item implements Comparable<Item> {
 	    			append(", price = $ ").append(price).toString();
 	    	}
 	    	else
-	    		str = sb.append(itemName).append(", price = $ ").append(price).toString();		
+	    		str = sb.append(itemName).append(", price = $").append(price).toString();		
     	}
     	else {
 	    	if(!mode) {

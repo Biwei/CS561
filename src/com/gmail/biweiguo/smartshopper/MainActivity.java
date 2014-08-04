@@ -56,7 +56,7 @@ public class MainActivity extends ListActivity {
         db = DbHelper.getInstance(this);
         list = db.getAllItems();
         
-        addChoicesOnSpinner();
+        //addChoicesOnSpinner();
         
         /** Defining the ArrayAdapter to set items to ListView */
         adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
@@ -124,6 +124,28 @@ public class MainActivity extends ListActivity {
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.main, menu);
 	    return super.onCreateOptionsMenu(menu);
+
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.show_details:
+	            showDetails();
+	            return true;
+	        case R.id.hide_details:
+	            hideDetails();
+	            return true;
+	        case R.id.sort_by_deadline:
+	        	sortByDeadline();
+	        	return true;
+	        case R.id.no_sort:
+	        	noSort();
+	        	return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 
 	}
 
@@ -242,6 +264,24 @@ public class MainActivity extends ListActivity {
 	
 	public void sortByDeadline() {
 		
+		Collections.sort(list, Item.DateComparator);
+		adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
+		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
+        updatedListTask.setAdapter(adapter);		
+	}
+	
+	public void hideDetails() {
+		Item.hideDetails();
+		onResume();
+	}
+	
+	public void showDetails() {
+		Item.showDetails();
+		onResume();
+	}
+	
+	public void noSort(){
+		onResume();
 	}
 	
 	public class MyOnItemSelectedListener implements OnItemSelectedListener {

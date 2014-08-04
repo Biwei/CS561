@@ -4,7 +4,24 @@
     tools:context="com.gmail.biweiguo.smartshopper.MainActivity" >
 
         <item
-        android:id="@+id/delete"
-        android:title="@string/delete"/>
+        android:id="@+id/show_details"
+        android:title="@string/show_details"
+        android:showAsAction="always"/>
+        
+        <item
+        android:id="@+id/hide_details"
+        android:title="@string/hide_details"
+        android:showAsAction="always"/>
+        
+        <item
+        android:id="@+id/sort_by_deadline"
+        android:title="@string/sort_by_deadline"
+        android:showAsAction="always"/>
+        
+        <item
+        android:id="@+id/no_sort"
+        android:title="@string/no_sort"
+        android:showAsAction="always"/>
+        
 
 </menu>
