@@ -12,7 +12,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Holo.Light" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -25,7 +25,7 @@
         <activity
             android:name=".AddItem"
             android:label="@string/title_activity_add_item"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@android:style/Theme.Holo.Light.Dialog" >
         </activity>
         <activity
             android:name=".BoughtActivity"
@@ -34,12 +34,12 @@
         <activity
             android:name=".EditItem"
             android:label="@string/title_activity_edit_item" 
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@android:style/Theme.Holo.Light.Dialog" >
         </activity>
         <activity
             android:name=".EditPrice"
             android:label="@string/title_activity_edit_price"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@android:style/Theme.Holo.Light.Dialog" >
         </activity>
     </application>
 

@@ -126,6 +126,8 @@ public class DbHelper extends SQLiteOpenHelper {
 		//item.setCount(cursor.getInt(2));
 		item.setStore(cursor.getString(2));
 		item.setDateString(cursor.getString(3));
+		Date date = Item.parseDate(item.getDateString());
+	    item.setDate(date);
 		// Adding contact to list
 		itemList.add(item);
 		} while (cursor.moveToNext());

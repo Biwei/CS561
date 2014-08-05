@@ -172,6 +172,7 @@ public class Item implements Comparable<Item> {
 		return this.getStore().compareTo(compare);
  
 	}
+	
     
 	public static Comparator<Item> StoreComparator = new Comparator<Item>() {
 
@@ -195,7 +196,7 @@ public class Item implements Comparable<Item> {
 			Date date2 = item2.getDate();
 
 			//descending order
-			return date2.compareTo(date1);
+			return date1.compareTo(date2);
 
 		}
 

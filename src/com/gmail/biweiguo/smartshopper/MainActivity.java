@@ -56,7 +56,7 @@ public class MainActivity extends ListActivity {
         db = DbHelper.getInstance(this);
         list = db.getAllItems();
         
-        //addChoicesOnSpinner();
+        addChoicesOnSpinner();
         
         /** Defining the ArrayAdapter to set items to ListView */
         adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
@@ -137,12 +137,6 @@ public class MainActivity extends ListActivity {
 	        case R.id.hide_details:
 	            hideDetails();
 	            return true;
-	        case R.id.sort_by_deadline:
-	        	sortByDeadline();
-	        	return true;
-	        case R.id.no_sort:
-	        	noSort();
-	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
@@ -297,6 +291,7 @@ public class MainActivity extends ListActivity {
 	    				sortByDeadline();
 	    				break;
 	    			default:
+	    				noSort();
 	    				break;
 	    		}
 	    				
