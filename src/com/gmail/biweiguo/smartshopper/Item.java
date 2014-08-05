@@ -40,7 +40,7 @@ public class Item implements Comparable<Item> {
         this.store = "";
         this.date = defaultDate;
         this.dateString = defaultString;
-        this.price = 0;
+        this.price = -1;		//for an item that's not bought yet
     }
     
     public Item(String itemName) {
@@ -49,7 +49,7 @@ public class Item implements Comparable<Item> {
         this.store = "";
         this.date = defaultDate;
         this.dateString = defaultString;
-        this.price = 0;
+        this.price = -1;
     }
     
     public void setDefault() {
@@ -132,28 +132,40 @@ public class Item implements Comparable<Item> {
     public String toString() {
     	
     	StringBuilder sb = new StringBuilder();
-    	String str;
+    	String str = new String();
     	
-    	if(price != 0) {
+    	//for items on shopping list
+    	if(price == -1) {
     		if(!mode) {
-	    		if(dateString.equals(defaultString)) {
-	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append("whenever").
-	    					append(", price = $ ").append(price).toString();
-	    		}
-	    		else
-	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append(dateString).
-	    			append(", price = $ ").append(price).toString();
-	    	}
-	    	else
-	    		str = sb.append(itemName).append(", price = $").append(price).toString();		
-    	}
-    	else {
-	    	if(!mode) {
-	    		if(dateString.equals(defaultString)) {
+	    		if(dateString.equals(defaultString)) 
 	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append("whenever").toString();
-	    		}
 	    		else
 	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append(dateString).toString();
+	    	}
+	    	else
+	    		str = itemName;		
+    	}
+    	//for items on bought list, without price information
+    	else if(price == 0) {
+	    	if(!mode) {
+	    		if(store.equals("wherever")) {
+	    			str = sb.append(itemName).append(" on ").append(dateString).toString();
+	    		}
+	    		else
+	    			str = sb.append(itemName).append(" from ").append(store).append(" on ").append(dateString).toString();
+	    	}
+	    	else
+	    		str = itemName;
+    	}
+    	//for items on bought list, with price information
+    	else {
+    		if(!mode) {
+	    		if(store.equals("wherever")) {
+	    			str = sb.append(itemName).append(" on ").append(dateString).append(" price: $").append(price).toString();
+	    		}
+	    		else
+	    			str = sb.append(itemName).append(" from ").append(store).append(" on ").append(dateString).
+	    					append(" price: $").append(price).toString();
 	    	}
 	    	else
 	    		str = itemName;

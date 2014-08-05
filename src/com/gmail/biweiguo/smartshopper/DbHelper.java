@@ -286,7 +286,7 @@ public class DbHelper extends SQLiteOpenHelper {
 		//values.put(KEY_COUNT, item.getCount()); // number of item
 		values.put(KEY_STORE, item.getStore()); // where to buy
 		values.put(KEY_DATE, currentDateStr); // purchase date
-		values.put(KEY_PRICE, item.getPrice()); //purchase price
+		values.put(KEY_PRICE, 0); //purchase price
 		// Inserting Row
 		db.insert(TABLE_BOUGHT, null, values);
 		db.close(); // Closing database connection
