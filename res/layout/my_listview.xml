@@ -7,8 +7,8 @@
     android:textAppearance="?android:attr/textAppearanceMedium" 
     android:gravity="center_vertical" 
     android:checkMark="?android:attr/listChoiceIndicatorMultiple" 
-    android:paddingLeft="6dip" 
-    android:paddingRight="6dip"/>
+    android:paddingLeft="12dip" 
+    android:paddingRight="12dip"/>
     
 
 

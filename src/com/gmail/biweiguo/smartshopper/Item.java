@@ -121,11 +121,11 @@ public class Item implements Comparable<Item> {
     }
     
     public static void hideDetails () {
-    	mode = true;
+    	mode = false;
     }
     
     public static void showDetails() {
-    	mode = false;
+    	mode = true;
     }
     
     @Override
@@ -136,7 +136,7 @@ public class Item implements Comparable<Item> {
     	
     	//for items on shopping list
     	if(price == -1) {
-    		if(!mode) {
+    		if(mode) {
 	    		if(dateString.equals(defaultString)) 
 	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append("whenever").toString();
 	    		else
@@ -147,7 +147,7 @@ public class Item implements Comparable<Item> {
     	}
     	//for items on bought list, without price information
     	else if(price == 0) {
-	    	if(!mode) {
+	    	if(mode) {
 	    		if(store.equals("wherever")) {
 	    			str = sb.append(itemName).append(" on ").append(dateString).toString();
 	    		}

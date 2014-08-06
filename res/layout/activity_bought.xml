@@ -47,9 +47,8 @@
 		    android:layout_height="wrap_content"
 		    android:textOn="Hide Details"
 		    android:textOff="Show Details"
-		    android:layout_weight="1"
+		    android:layout_weight="0.25"
 		    android:textSize="12sp"
-		    style="?android:attr/borderlessButtonStyle"
 		    android:onClick="onToggleClicked"/>
     	
      </LinearLayout>
