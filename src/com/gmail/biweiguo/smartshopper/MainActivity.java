@@ -216,7 +216,7 @@ public class MainActivity extends ListActivity {
 		 
 		sortBy = (Spinner) findViewById(R.id.spinner_sort);
 		List<String> choiceList = new ArrayList<String>();
-		choiceList.add("Nothing");
+		choiceList.add("None");
 		choiceList.add("Store");
 		choiceList.add("Deadline");
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,

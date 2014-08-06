@@ -2,6 +2,9 @@ package com.gmail.biweiguo.smartshopper;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+
+import com.gmail.biweiguo.smartshopper.MainActivity.MyOnItemSelectedListener;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.ListActivity;
@@ -12,16 +15,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 public class BoughtActivity extends ListActivity  {
 	
     ArrayList<Item> list;
     ArrayAdapter<Item> adapter;
     protected static DbHelper db;
+    private Spinner sortBy;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +37,11 @@ public class BoughtActivity extends ListActivity  {
 		setContentView(R.layout.activity_bought);
 		db = DbHelper.getInstance(this);
         list = db.getAllPurchases();
-        adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
+        adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
         ListView listItem = (ListView) findViewById(android.R.id.list);
         listItem.setAdapter(adapter);
+        
+        addChoicesOnSpinner();
         
         Button del = (Button) findViewById(R.id.button_delete_bought);
         OnClickListener listenerDel = new OnClickListener() {
@@ -118,10 +128,19 @@ public class BoughtActivity extends ListActivity  {
 		startActivity(intent);
 	}
 	
-	public void sortByDeadline() {
+	public void sortByStore() {
+		
+		Collections.sort(list, Item.StoreComparator);
+		adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
+		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
+        updatedListTask.setAdapter(adapter);
+		
+	}
+	
+	public void sortByDate() {
 		
 		Collections.sort(list, Item.DateComparator);
-		adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
+		adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
 		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
         updatedListTask.setAdapter(adapter);		
 	}
@@ -140,13 +159,65 @@ public class BoughtActivity extends ListActivity  {
 		onResume();
 	}
 	
+	public void addChoicesOnSpinner() {
+		 
+		sortBy = (Spinner) findViewById(R.id.spinner_sort1);
+		List<String> choiceList = new ArrayList<String>();
+		choiceList.add("None");
+		choiceList.add("Store");
+		choiceList.add("Date");
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+			android.R.layout.simple_spinner_item, choiceList);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		sortBy.setAdapter(dataAdapter);
+		sortBy.setOnItemSelectedListener(new MyOnItemSelectedListener());
+	}
+	
+	public void onToggleClicked(View view) {
+	    // Is the button now checked?
+	    boolean on = ((ToggleButton) view).isChecked();
+	    
+	    if(on)
+	    	showDetails();
+	    else
+	    	hideDetails();
+	}
+	
 	@Override
     public void onResume(){
     super.onResume();
         adapter.clear();
         list = db.getAllPurchases();
-        adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
+        adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
         ListView updatedListTask = (ListView) findViewById(android.R.id.list);
         updatedListTask.setAdapter(adapter);
     }
+	
+	public class MyOnItemSelectedListener implements OnItemSelectedListener {
+	    @Override
+		    public void onItemSelected(AdapterView parent, View view, int pos, long id) {
+	    	
+	    		String choice = parent.getItemAtPosition(pos).toString();
+	    		switch(choice) {
+	    			case "Store":
+	    				sortByStore();
+	    				break;
+	    			case "Date":
+	    				sortByDate();
+	    				break;
+	    			default:
+	    				noSort();
+	    				break;
+	    		}
+	    				
+    			
+		        Toast.makeText(parent.getContext(), "Selected choice : " + choice, Toast.LENGTH_SHORT).show();
+		    
+	    	}
+		 
+		    @Override
+		    public void onNothingSelected(AdapterView parent) {
+		 
+		    }
+		}
 }

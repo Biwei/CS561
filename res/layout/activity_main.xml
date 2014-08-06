@@ -26,12 +26,23 @@
 	   	    style="?android:attr/borderlessButtonStyle"
 	   	    android:text="@string/quick_add"
 	   	    android:textSize="12sp"
-	   	    android:layout_weight="1" />
+	   	    android:layout_weight="0.5" />
+	   	
+		<ToggleButton 
+    		android:id="@+id/show_details"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:textOn="Hide Details"
+		    android:textOff="Show Details"
+		    android:layout_weight="1"
+		    android:textSize="12sp"
+		    style="?android:attr/borderlessButtonStyle"
+		    android:onClick="onToggleClicked"/>
 	</LinearLayout>
    
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:orientation="horizontal"
         android:background="#dbdbdb"
         android:weightSum="1" >
@@ -75,20 +86,18 @@
     	    android:textSize="12sp" />
 
      </LinearLayout>
-
-       	
+    	
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-		android:background="#dbdbdb" >
+        android:layout_height="35dp"
+		android:background="#dbdbdb">
 
 		<TextView
 		    android:id="@+id/textview_sort"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:text="Sort By"
-		    android:textSize="12sp"
-		    android:layout_alignParentTop="true" />
+		    android:textSize="12sp" />
     	
     	<Spinner
     	    android:id="@+id/spinner_sort"
@@ -96,20 +105,11 @@
     		android:layout_height="wrap_content"
     		android:layout_alignBaseline="@id/textview_sort"
     		android:layout_toRightOf="@id/textview_sort"
+    		android:textSize="12sp"
     		android:drawSelectorOnTop="true" />
+    	</RelativeLayout>
     	
-    	<ToggleButton 
-    		android:id="@+id/show_details"
-    		android:layout_toRightOf="@id/spinner_sort"
-    	    android:layout_alignBaseline="@id/spinner_sort"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:textOn="Hide Details"
-		    android:textOff="Show Details"
-		    style="?android:attr/borderlessButtonStyle"
-		    android:onClick="onToggleClicked"/>
 
-    </RelativeLayout>
     
      <ListView
          android:id="@android:id/list"
