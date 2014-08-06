@@ -33,8 +33,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class MainActivity extends ListActivity {
 	
@@ -59,7 +61,7 @@ public class MainActivity extends ListActivity {
         addChoicesOnSpinner();
         
         /** Defining the ArrayAdapter to set items to ListView */
-        adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
+        adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
         ListView listItem = (ListView) findViewById(android.R.id.list);
         
         /** Defining a click event listener for the button "Delete" */
@@ -106,7 +108,7 @@ public class MainActivity extends ListActivity {
                 }
                 checkedItemPositions.clear();
                 adapter.notifyDataSetChanged();
-                goToBought(v);
+                goToBought();
             }
         };
  
@@ -131,11 +133,8 @@ public class MainActivity extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
-	        case R.id.show_details:
-	            showDetails();
-	            return true;
-	        case R.id.hide_details:
-	            hideDetails();
+	        case R.id.go_to_bought:
+	            goToBought();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
@@ -207,7 +206,7 @@ public class MainActivity extends ListActivity {
         }
 	}
 	
-	public void goToBought (View view) {
+	public void goToBought () {
 		
 		Intent intent =  new Intent(this, BoughtActivity.class);	
 		startActivity(intent);
@@ -227,13 +226,22 @@ public class MainActivity extends ListActivity {
 		sortBy.setOnItemSelectedListener(new MyOnItemSelectedListener());
 	}
 
+	public void onToggleClicked(View view) {
+	    // Is the button now checked?
+	    boolean on = ((ToggleButton) view).isChecked();
+	    
+	    if(on)
+	    	showDetails();
+	    else
+	    	hideDetails();
+	}
 
 	@Override
     public void onResume(){
     super.onResume();
         adapter.clear();
         list = db.getAllItems();
-        adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
+        adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
         ListView updatedListTask = (ListView) findViewById(android.R.id.list);
         updatedListTask.setAdapter(adapter);
     }
@@ -241,7 +249,7 @@ public class MainActivity extends ListActivity {
 	public void sortByNothing() {
 		
 		list = db.getAllItems();
-		adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
+		adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
 		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
         updatedListTask.setAdapter(adapter);
 		
@@ -250,7 +258,7 @@ public class MainActivity extends ListActivity {
 	public void sortByStore() {
 		
 		Collections.sort(list, Item.StoreComparator);
-		adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
+		adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
 		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
         updatedListTask.setAdapter(adapter);
 		
@@ -259,7 +267,7 @@ public class MainActivity extends ListActivity {
 	public void sortByDeadline() {
 		
 		Collections.sort(list, Item.DateComparator);
-		adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_multiple_choice, list);
+		adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
 		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
         updatedListTask.setAdapter(adapter);		
 	}

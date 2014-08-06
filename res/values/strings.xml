@@ -20,8 +20,8 @@
     <string name="button_clear">Clear</string>
     <string name="button_back">Back</string>
     <string name="title_activity_bought">BoughtActivity</string>
-    <string name="button_back_to_shop">Back To Shopping List</string>
-    <string name="button_to_bought">Go To Purchase Record</string>
+    <string name="button_back_to_shop">Go To Shopping List</string>
+    <string name="button_to_bought">Go To History</string>
     <string name="title_activity_edit_item">EditItem</string>
     <string name="button_save">Save</string>
     <string name="button_cancel">Cancel</string>

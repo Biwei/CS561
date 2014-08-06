@@ -3,56 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:paddingBottom="@dimen/activity_vertical_margin"
-	android:paddingLeft="@dimen/activity_horizontal_margin"
-	android:paddingRight="@dimen/activity_horizontal_margin"
-	android:paddingTop="@dimen/activity_vertical_margin"
-	android:background="?android:attr/dividerVertical"
 	android:orientation="vertical" >
-
-    <Button
-        android:id="@+id/button_to_bought"
+ 
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:onClick="goToBought"
-        android:text="@string/button_to_bought"
-        android:textSize="12sp" />
+        android:layout_height="35dp"
+        android:paddingLeft="6dip" 
+    	android:paddingRight="6dip"
+        android:orientation="horizontal" >
         
+	    <EditText
+	       	android:id="@+id/text_quick_add"
+	       	android:layout_width="wrap_content"
+	       	android:layout_height="wrap_content"
+	       	android:layout_weight="1"/>
+	
+	   	<Button
+	   	    android:id="@+id/button_quick_add"
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+	   	    android:onClick="quickAddButtonPressed"
+	   	    style="?android:attr/borderlessButtonStyle"
+	   	    android:text="@string/quick_add"
+	   	    android:textSize="12sp"
+	   	    android:layout_weight="1" />
+	</LinearLayout>
+   
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="1" >
-
-    	<EditText
-        	android:id="@+id/text_quick_add"
-        	android:layout_width="0dp"
-        	android:layout_height="wrap_content"
-       	 	android:layout_margin="0dp"
-        	android:layout_weight="0.4" />
-
-    	<Button
-    	    android:id="@+id/button_quick_add"
-    	    android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"
-    	    android:layout_weight="0.3"
-    	    android:text="@string/quick_add"
-    	    android:onClick="quickAddButtonPressed"
-    	    android:textSize="12sp" />
-    	
-    	<Spinner
-    	    android:id="@+id/spinner_sort"
-    	    android:layout_width="64dp"
-    	    android:textSize="12sp"
-    	    android:layout_weight="0.3"
-    	    android:layout_height="match_parent" />
-
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:background="#dbdbdb"
         android:weightSum="1" >
 
     	<Button
@@ -62,7 +43,7 @@
     	    android:layout_weight="0.25"
     	    android:onClick="addButtonPressed"
     	    android:text="@string/button1"
-    	    android:background="?android:attr/selectableItemBackground"
+    	    style="?android:attr/borderlessButtonStyle"
     	    android:textSize="12sp" />
 
     	<Button
@@ -71,7 +52,7 @@
     	    android:layout_height="wrap_content"
     	    android:layout_weight="0.25"
     	    android:text="@string/button2"
-    	    android:background="?android:attr/selectableItemBackground"
+    	    style="?android:attr/borderlessButtonStyle"
     	    android:textSize="12sp" />
     
     	<Button
@@ -81,7 +62,7 @@
     	    android:layout_weight="0.25"
     	    android:onClick="editButtonPressed"
     	    android:text="@string/button3"
-    	    android:background="?android:attr/selectableItemBackground"
+    	    style="?android:attr/borderlessButtonStyle"
     	    android:textSize="12sp" />
 
     	<Button
@@ -90,17 +71,52 @@
     	    android:layout_height="wrap_content"
     	    android:layout_weight="0.25"
     	    android:text="@string/button4"
-    	    android:background="?android:attr/selectableItemBackground"
+    	    style="?android:attr/borderlessButtonStyle"
     	    android:textSize="12sp" />
 
      </LinearLayout>
-     
-     <ListView
-        android:id="@android:id/list"
+
+       	
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:choiceMode="multipleChoice"
-        tools:listitem="@android:layout/simple_list_item_1" >
+		android:background="#dbdbdb" >
+
+		<TextView
+		    android:id="@+id/textview_sort"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="Sort By"
+		    android:textSize="12sp"
+		    android:layout_alignParentTop="true" />
+    	
+    	<Spinner
+    	    android:id="@+id/spinner_sort"
+    	    android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:layout_alignBaseline="@id/textview_sort"
+    		android:layout_toRightOf="@id/textview_sort"
+    		android:drawSelectorOnTop="true" />
+    	
+    	<ToggleButton 
+    		android:id="@+id/show_details"
+    		android:layout_toRightOf="@id/spinner_sort"
+    	    android:layout_alignBaseline="@id/spinner_sort"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:textOn="Hide Details"
+		    android:textOff="Show Details"
+		    style="?android:attr/borderlessButtonStyle"
+		    android:onClick="onToggleClicked"/>
+
+    </RelativeLayout>
+    
+     <ListView
+         android:id="@android:id/list"
+         android:layout_width="match_parent"
+         android:layout_height="304dp"
+         android:choiceMode="multipleChoice"
+         tools:listitem="@android:layout/simple_list_item_1" >
 
      </ListView>
         

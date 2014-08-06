@@ -70,11 +70,8 @@ public class BoughtActivity extends ListActivity  {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
-	        case R.id.show_details1:
-	            showDetails();
-	            return true;
-	        case R.id.hide_details1:
-	            hideDetails();
+	        case R.id.go_to_shop:
+	        	backButtonPressed();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
@@ -115,7 +112,7 @@ public class BoughtActivity extends ListActivity  {
 	}
 	
 	
-	public void backButtonPressed(View view) {
+	public void backButtonPressed() {
 	    // Do something in response to button
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
