@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -44,6 +45,8 @@ public class CommonActivity extends ListActivity {
     ArrayList<Item> list;
     ArrayAdapter<Item> adapter;
     Spinner sortBy;
+    ToggleButton toggle;
+    SharedPreferences preferences;
 	
 	public void editButtonPressed (View view) {
 		SparseBooleanArray checkedItemPositions = getListView().getCheckedItemPositions();
@@ -99,6 +102,7 @@ public class CommonActivity extends ListActivity {
         }
     };
     
+  /**  
 	public void onToggleClicked(View view) {
 	    // Is the button now checked?
 	    boolean on = ((ToggleButton) view).isChecked();
@@ -112,8 +116,8 @@ public class CommonActivity extends ListActivity {
 	    
 	    adapter.notifyDataSetChanged();
 	}
+	**/
 
-	
 	public void sortByNothing() {
 		
 		adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);

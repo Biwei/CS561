@@ -48,6 +48,7 @@ public class MainActivity extends CommonActivity {
         /** Reference to the delete button of the layout main.xml */
         Button del = (Button) findViewById(R.id.button_delete);
         Button bought = (Button)findViewById(R.id.button_bought);
+        
         /** Prepare database */
         
         db = DbHelper.getInstance(this);
@@ -165,10 +166,24 @@ public class MainActivity extends CommonActivity {
 		Intent intent =  new Intent(this, BoughtActivity.class);	
 		startActivity(intent);
 	}
+	
+	public void onToggleClicked(View view) {
+	    // Is the button now checked?
+	    boolean on = ((ToggleButton) view).isChecked();
+	    
+	    if(on) {
+	    	Item.showCartDetails();
+	    }
+	    else {
+	    	Item.hideCartDetails();
+	    }
+	    
+	    adapter.notifyDataSetChanged();
+	}
 
 	@Override
     public void onResume(){
-    super.onResume();
+		super.onResume();
         adapter.clear();
         list = db.getAllItems();
         adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);

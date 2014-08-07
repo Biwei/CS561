@@ -95,6 +95,20 @@ public class BoughtActivity extends CommonActivity  {
         }
 	}
 	
+	public void onToggleClicked(View view) {
+	    // Is the button now checked?
+	    boolean on = ((ToggleButton) view).isChecked();
+	    
+	    if(on) {
+	    	Item.showBoughtDetails();
+	    }
+	    else {
+	    	Item.hideBoughtDetails();
+	    }
+	    
+	    adapter.notifyDataSetChanged();
+	}
+	
 	
 	public void backButtonPressed() {
 	    // Do something in response to button
@@ -118,7 +132,7 @@ public class BoughtActivity extends CommonActivity  {
 	
 	@Override
     public void onResume(){
-    super.onResume();
+		super.onResume();
         adapter.clear();
         list = db.getAllPurchases();
         adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);

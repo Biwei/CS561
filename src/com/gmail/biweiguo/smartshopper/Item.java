@@ -10,7 +10,8 @@ import android.util.Log;
 public class Item implements Comparable<Item> {
 
 	private static final String defaultString = "01/01/2114"; //a remote day
-	private static boolean mode = false; //false for hiding details in toString.
+	private static boolean cartMode = false; 
+	private static boolean boughtMode = false; //false for hiding details in toString.
     private String itemName;
     private int id;
     //private int count;
@@ -120,12 +121,20 @@ public class Item implements Comparable<Item> {
     	this.dateString = str;
     }
     
-    public static void hideDetails () {
-    	mode = false;
+    public static void hideCartDetails () {
+    	cartMode = false;
     }
     
-    public static void showDetails() {
-    	mode = true;
+    public static void showCartDetails() {
+    	cartMode = true;
+    }
+    
+    public static void hideBoughtDetails () {
+    	boughtMode = false;
+    }
+    
+    public static void showBoughtDetails() {
+    	boughtMode = true;
     }
     
     @Override
@@ -136,7 +145,7 @@ public class Item implements Comparable<Item> {
     	
     	//for items on shopping list
     	if(price == -1) {
-    		if(mode) {
+    		if(cartMode) {
 	    		if(dateString.equals(defaultString)) 
 	    			str = sb.append(itemName).append(" from ").append(store).append(" by ").append("whenever").toString();
 	    		else
@@ -147,7 +156,7 @@ public class Item implements Comparable<Item> {
     	}
     	//for items on bought list, without price information
     	else if(price == 0) {
-	    	if(mode) {
+	    	if(boughtMode) {
 	    		if(store.equals("wherever")) {
 	    			str = sb.append(itemName).append(" on ").append(dateString).toString();
 	    		}
@@ -159,7 +168,7 @@ public class Item implements Comparable<Item> {
     	}
     	//for items on bought list, with price information
     	else {
-    		if(!mode) {
+    		if(!boughtMode) {
 	    		if(store.equals("wherever")) {
 	    			str = sb.append(itemName).append(" on ").append(dateString).append(" price: $").append(price).toString();
 	    		}
