@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
@@ -142,6 +143,21 @@ public class CommonActivity extends ListActivity {
 		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
         updatedListTask.setAdapter(adapter);		
 	}
+	
+    public static void setPreferences(String key, Boolean value, Context context)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(key, value);
+        editor.commit();
+    }
+
+
+    public static Boolean getPreferences(String key, Context context)
+    {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getBoolean(key, true);
+    }
 	
 	public class MyOnItemSelectedListener implements OnItemSelectedListener {
 	    @Override

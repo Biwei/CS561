@@ -23,6 +23,8 @@ import android.widget.ToggleButton;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 public class BoughtActivity extends CommonActivity  {
+	
+	ToggleButton toggle1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,10 @@ public class BoughtActivity extends CommonActivity  {
         
         addChoicesOnSpinner();
         
+        toggle1 = (ToggleButton)findViewById(R.id.show_details1);
+	    toggle1.setChecked(getPreferences("etatToggle1",this));
+	    setPreferences("etatToggle1", toggle1.isChecked(), this);
+        
         Button del = (Button) findViewById(R.id.button_delete_bought);
         
         del.setOnClickListener(listenerDel);
@@ -48,6 +54,31 @@ public class BoughtActivity extends CommonActivity  {
 		getMenuInflater().inflate(R.menu.bought, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
+	
+	@Override
+	public void onStop(){
+	    super.onStop();
+	    setPreferences("etatToggle1", toggle1.isChecked(), this);
+	}
+	
+	@Override
+	public void onPause(){
+	    super.onPause();
+	    setPreferences("etatToggle1", toggle1.isChecked(), this);
+	}
+	
+	@Override
+	public void onRestart(){
+	    super.onRestart();
+	    toggle1.setChecked(getPreferences("etatToggle1",this));
+	}
+	
+	@Override
+	public void onStart(){
+	    super.onStart();
+	    toggle1.setChecked(getPreferences("etatToggle1",this));
+	}
+	
 
 
 	@Override
@@ -133,6 +164,7 @@ public class BoughtActivity extends CommonActivity  {
 	@Override
     public void onResume(){
 		super.onResume();
+		toggle1.setChecked(getPreferences("etatToggle1",this));
         adapter.clear();
         list = db.getAllPurchases();
         adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);

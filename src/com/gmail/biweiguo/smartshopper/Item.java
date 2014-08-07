@@ -10,8 +10,8 @@ import android.util.Log;
 public class Item implements Comparable<Item> {
 
 	private static final String defaultString = "01/01/2114"; //a remote day
-	private static boolean cartMode = false; 
-	private static boolean boughtMode = false; //false for hiding details in toString.
+	private static boolean cartMode = true; 
+	private static boolean boughtMode = true; //true for showing details
     private String itemName;
     private int id;
     //private int count;

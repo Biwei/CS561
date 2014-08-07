@@ -39,6 +39,8 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends CommonActivity {
+	
+	ToggleButton toggle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,10 @@ public class MainActivity extends CommonActivity {
         list = db.getAllItems();
         
         addChoicesOnSpinner();
+        
+        toggle = (ToggleButton)findViewById(R.id.show_details);
+	    toggle.setChecked(getPreferences("etatToggle",this));
+	    setPreferences("etatToggle", toggle.isChecked(), this);
         
         /** Defining the ArrayAdapter to set items to ListView */
         adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
@@ -180,10 +186,36 @@ public class MainActivity extends CommonActivity {
 	    
 	    adapter.notifyDataSetChanged();
 	}
+	
+	@Override
+	public void onStop(){
+	    super.onStop();
+	    setPreferences("etatToggle", toggle.isChecked(), this);
+	}
+	
+	@Override
+	public void onPause(){
+	    super.onPause();
+	    setPreferences("etatToggle", toggle.isChecked(), this);
+	}
+	
+	@Override
+	public void onRestart(){
+	    super.onRestart();
+	    toggle.setChecked(getPreferences("etatToggle",this));
+	}
+	
+	@Override
+	public void onStart(){
+	    super.onStart();
+	    toggle.setChecked(getPreferences("etatToggle",this));
+	}
+	
 
 	@Override
     public void onResume(){
 		super.onResume();
+		toggle.setChecked(getPreferences("etatToggle",this));
         adapter.clear();
         list = db.getAllItems();
         adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
