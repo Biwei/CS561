@@ -121,22 +121,16 @@ public class Item implements Comparable<Item> {
     	this.dateString = str;
     }
     
-    public static void hideCartDetails () {
-    	cartMode = false;
+    public static void setCartMode(boolean mode){
+    	
+    	cartMode = mode;
     }
     
-    public static void showCartDetails() {
-    	cartMode = true;
+    public static void setBoughtMode(boolean mode) {
+    	
+    	boughtMode = mode;
     }
-    
-    public static void hideBoughtDetails () {
-    	boughtMode = false;
-    }
-    
-    public static void showBoughtDetails() {
-    	boughtMode = true;
-    }
-    
+   
     @Override
     public String toString() {
     	

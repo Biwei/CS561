@@ -39,7 +39,9 @@ public class BoughtActivity extends CommonActivity  {
         addChoicesOnSpinner();
         
         toggle1 = (ToggleButton)findViewById(R.id.show_details1);
-	    toggle1.setChecked(getPreferences("etatToggle1",this));
+        boolean mode = getPreferences("etatToggle1",this);
+	    toggle1.setChecked(mode);
+	    Item.setBoughtMode(mode);
 	    setPreferences("etatToggle1", toggle1.isChecked(), this);
         
         Button del = (Button) findViewById(R.id.button_delete_bought);
@@ -70,13 +72,17 @@ public class BoughtActivity extends CommonActivity  {
 	@Override
 	public void onRestart(){
 	    super.onRestart();
-	    toggle1.setChecked(getPreferences("etatToggle1",this));
+	    boolean mode = getPreferences("etatToggle1",this);
+	    toggle1.setChecked(mode);
+	    Item.setBoughtMode(mode);
 	}
 	
 	@Override
 	public void onStart(){
 	    super.onStart();
-	    toggle1.setChecked(getPreferences("etatToggle1",this));
+	    boolean mode = getPreferences("etatToggle1",this);
+	    toggle1.setChecked(mode);
+	    Item.setBoughtMode(mode);
 	}
 	
 
@@ -130,12 +136,7 @@ public class BoughtActivity extends CommonActivity  {
 	    // Is the button now checked?
 	    boolean on = ((ToggleButton) view).isChecked();
 	    
-	    if(on) {
-	    	Item.showBoughtDetails();
-	    }
-	    else {
-	    	Item.hideBoughtDetails();
-	    }
+	    Item.setBoughtMode(on);
 	    
 	    adapter.notifyDataSetChanged();
 	}
@@ -164,7 +165,9 @@ public class BoughtActivity extends CommonActivity  {
 	@Override
     public void onResume(){
 		super.onResume();
-		toggle1.setChecked(getPreferences("etatToggle1",this));
+		boolean mode = getPreferences("etatToggle1",this);
+	    toggle1.setChecked(mode);
+	    Item.setBoughtMode(mode);
         adapter.clear();
         list = db.getAllPurchases();
         adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);

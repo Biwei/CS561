@@ -59,7 +59,9 @@ public class MainActivity extends CommonActivity {
         addChoicesOnSpinner();
         
         toggle = (ToggleButton)findViewById(R.id.show_details);
-	    toggle.setChecked(getPreferences("etatToggle",this));
+        boolean mode = getPreferences("etatToggle",this);
+	    toggle.setChecked(mode);
+	    Item.setCartMode(mode);
 	    setPreferences("etatToggle", toggle.isChecked(), this);
         
         /** Defining the ArrayAdapter to set items to ListView */
@@ -177,12 +179,7 @@ public class MainActivity extends CommonActivity {
 	    // Is the button now checked?
 	    boolean on = ((ToggleButton) view).isChecked();
 	    
-	    if(on) {
-	    	Item.showCartDetails();
-	    }
-	    else {
-	    	Item.hideCartDetails();
-	    }
+	    Item.setCartMode(on);
 	    
 	    adapter.notifyDataSetChanged();
 	}
@@ -202,20 +199,26 @@ public class MainActivity extends CommonActivity {
 	@Override
 	public void onRestart(){
 	    super.onRestart();
-	    toggle.setChecked(getPreferences("etatToggle",this));
+	    boolean mode = getPreferences("etatToggle",this);
+	    toggle.setChecked(mode);
+	    Item.setCartMode(mode);
 	}
 	
 	@Override
 	public void onStart(){
 	    super.onStart();
-	    toggle.setChecked(getPreferences("etatToggle",this));
+	    boolean mode = getPreferences("etatToggle",this);
+	    toggle.setChecked(mode);
+	    Item.setCartMode(mode);
 	}
 	
 
 	@Override
     public void onResume(){
 		super.onResume();
-		toggle.setChecked(getPreferences("etatToggle",this));
+		boolean mode = getPreferences("etatToggle",this);
+	    toggle.setChecked(mode);
+	    Item.setCartMode(mode);
         adapter.clear();
         list = db.getAllItems();
         adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);

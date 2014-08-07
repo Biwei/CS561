@@ -53,7 +53,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
         // Use the application context, which will ensure that you 
         // don't accidentally leak an Activity's context.
-        // See this article for more information: http://bit.ly/6LRzfx
         if (singleInstance == null) {
           singleInstance = new DbHelper(context.getApplicationContext());
         }
@@ -128,11 +127,11 @@ public class DbHelper extends SQLiteOpenHelper {
 		item.setDateString(cursor.getString(3));
 		Date date = Item.parseDate(item.getDateString());
 	    item.setDate(date);
-		// Adding contact to list
+		
 		itemList.add(item);
 		} while (cursor.moveToNext());
 		}
-		// return task list
+		
 		return itemList;
 		}
 	
@@ -267,11 +266,11 @@ public class DbHelper extends SQLiteOpenHelper {
 	    Date date = Item.parseDate(item.getDateString());
 	    item.setDate(date);
 	    item.setPrice(cursor.getFloat(4));
-		// Adding contact to list
+		
 		itemList.add(item);
 		} while (cursor.moveToNext());
 		}
-		// return task list
+		
 		return itemList;
 		}
 	
@@ -302,7 +301,7 @@ public class DbHelper extends SQLiteOpenHelper {
 	public void removeBoughtItem(long id) {
 		
 		SQLiteDatabase db = this.getWritableDatabase();
-        //String string =String.valueOf(id);
+        //String string = String.valueOf(id);
         db.execSQL("DELETE FROM " + TABLE_BOUGHT + " WHERE id = '" + id + "'");
         Log.d("bought ", id + " deleted");
         db.close();
