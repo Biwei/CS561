@@ -38,12 +38,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class MainActivity extends ListActivity {
-	
-    protected static DbHelper db;
-    ArrayList<Item> list;
-    ArrayAdapter<Item> adapter;
-    private Spinner sortBy;
+public class MainActivity extends CommonActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,30 +57,7 @@ public class MainActivity extends ListActivity {
         
         /** Defining the ArrayAdapter to set items to ListView */
         adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
-        ListView listItem = (ListView) findViewById(android.R.id.list);
-        
-        /** Defining a click event listener for the button "Delete" */
-        OnClickListener listenerDel = new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /** Getting the checked items from the listview */
-                SparseBooleanArray checkedItemPositions = getListView().getCheckedItemPositions();
-                int itemCount = getListView().getCount();
-                
- 
-                for(int i=itemCount-1; i >= 0; i--){
-                    if(checkedItemPositions.get(i)){
-                    	Item selected = new Item ();
-                    	selected = list.get(i);
-                        adapter.remove(selected);
-                        db.removeItem(selected.getId());
-                    }
-                }
-                checkedItemPositions.clear();
-                adapter.notifyDataSetChanged();
-            }
-        };
- 
+        ListView listItem = (ListView) findViewById(android.R.id.list);       
  
         /** Setting the event listener for the delete button */
         del.setOnClickListener(listenerDel);
@@ -141,6 +113,20 @@ public class MainActivity extends ListActivity {
 	    }
 
 	}
+	
+	public void addChoicesOnSpinner() {
+		 
+		sortBy = (Spinner) findViewById(R.id.spinner_sort);
+		List<String> choiceList = new ArrayList<String>();
+		choiceList.add("None");
+		choiceList.add("Store");
+		choiceList.add("Deadline");
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+			android.R.layout.simple_spinner_item, choiceList);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		sortBy.setAdapter(dataAdapter);
+		sortBy.setOnItemSelectedListener(new MyOnItemSelectedListener());
+	}
 
 	public void quickAddButtonPressed(View view) {
 	    // Do something in response to button
@@ -174,66 +160,10 @@ public class MainActivity extends ListActivity {
 		startActivity(intent);
 	}
 	
-	public void editButtonPressed (View view) {
-		SparseBooleanArray checkedItemPositions = getListView().getCheckedItemPositions();
-        int itemCount = getListView().getCount();
-        int numberSelected = 0;
-        int idSelected = 0;
-        Item selected = new Item ();
-
-        for(int i=itemCount-1; i >= 0; i--){
-            if(checkedItemPositions.get(i)){
-            	numberSelected++;
-            }
-        }
-        //
-        if(numberSelected == 0) {
-        	Toast.makeText(this, "You have to select an item for editing!", Toast.LENGTH_LONG).show();
-        }
-        else if(numberSelected > 1) {
-        	Toast.makeText(this, "You can only edit one item at a time!", Toast.LENGTH_LONG).show();
-        }
-        else {
-        	for(int i=itemCount-1; i >= 0; i--){
-                if(checkedItemPositions.get(i)){
-                	selected = list.get(i);
-                	idSelected = selected.getId();
-                }
-            }
-        	Intent intent = new Intent(this, EditItem.class);
-        	intent.putExtra("selected", idSelected);
-        	startActivity(intent);
-        }
-	}
-	
 	public void goToBought () {
 		
 		Intent intent =  new Intent(this, BoughtActivity.class);	
 		startActivity(intent);
-	}
-	
-	public void addChoicesOnSpinner() {
-		 
-		sortBy = (Spinner) findViewById(R.id.spinner_sort);
-		List<String> choiceList = new ArrayList<String>();
-		choiceList.add("None");
-		choiceList.add("Store");
-		choiceList.add("Deadline");
-		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-			android.R.layout.simple_spinner_item, choiceList);
-		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		sortBy.setAdapter(dataAdapter);
-		sortBy.setOnItemSelectedListener(new MyOnItemSelectedListener());
-	}
-
-	public void onToggleClicked(View view) {
-	    // Is the button now checked?
-	    boolean on = ((ToggleButton) view).isChecked();
-	    
-	    if(on)
-	    	showDetails();
-	    else
-	    	hideDetails();
 	}
 
 	@Override
@@ -246,71 +176,4 @@ public class MainActivity extends ListActivity {
         updatedListTask.setAdapter(adapter);
     }
 	
-	public void sortByNothing() {
-		
-		list = db.getAllItems();
-		adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
-		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
-        updatedListTask.setAdapter(adapter);
-		
-	}
-	
-	public void sortByStore() {
-		
-		Collections.sort(list, Item.StoreComparator);
-		adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
-		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
-        updatedListTask.setAdapter(adapter);
-		
-	}
-	
-	public void sortByDeadline() {
-		
-		Collections.sort(list, Item.DateComparator);
-		adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
-		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
-        updatedListTask.setAdapter(adapter);		
-	}
-	
-	public void hideDetails() {
-		Item.hideDetails();
-		onResume();
-	}
-	
-	public void showDetails() {
-		Item.showDetails();
-		onResume();
-	}
-	
-	public void noSort(){
-		onResume();
-	}
-	
-	public class MyOnItemSelectedListener implements OnItemSelectedListener {
-	    @Override
-		    public void onItemSelected(AdapterView parent, View view, int pos, long id) {
-	    	
-	    		String choice = parent.getItemAtPosition(pos).toString();
-	    		switch(choice) {
-	    			case "Store":
-	    				sortByStore();
-	    				break;
-	    			case "Deadline":
-	    				sortByDeadline();
-	    				break;
-	    			default:
-	    				noSort();
-	    				break;
-	    		}
-	    				
-    			
-		        Toast.makeText(parent.getContext(), "Selected choice : " + choice, Toast.LENGTH_SHORT).show();
-		    
-	    	}
-		 
-		    @Override
-		    public void onNothingSelected(AdapterView parent) {
-		 
-		    }
-		}
 }

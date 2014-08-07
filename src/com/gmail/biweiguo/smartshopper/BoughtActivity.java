@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.gmail.biweiguo.smartshopper.MainActivity.MyOnItemSelectedListener;
-
 import android.support.v7.app.ActionBarActivity;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -24,12 +22,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class BoughtActivity extends ListActivity  {
-	
-    ArrayList<Item> list;
-    ArrayAdapter<Item> adapter;
-    protected static DbHelper db;
-    private Spinner sortBy;
+public class BoughtActivity extends CommonActivity  {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +37,7 @@ public class BoughtActivity extends ListActivity  {
         addChoicesOnSpinner();
         
         Button del = (Button) findViewById(R.id.button_delete_bought);
-        OnClickListener listenerDel = new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /** Getting the checked items from the listview */
-                SparseBooleanArray checkedItemPositions = getListView().getCheckedItemPositions();
-                int itemCount = getListView().getCount();
-                
- 
-                for(int i=itemCount-1; i >= 0; i--){
-                    if(checkedItemPositions.get(i)){
-                    	Item selected = new Item ();
-                    	selected = list.get(i);
-                        adapter.remove(selected);
-                        db.removeBoughtItem(selected.getId());
-                    }
-                }
-                checkedItemPositions.clear();
-                adapter.notifyDataSetChanged();
-            }
-        };
+        
         del.setOnClickListener(listenerDel);
         
 	}
@@ -128,37 +102,6 @@ public class BoughtActivity extends ListActivity  {
 		startActivity(intent);
 	}
 	
-	public void sortByStore() {
-		
-		Collections.sort(list, Item.StoreComparator);
-		adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
-		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
-        updatedListTask.setAdapter(adapter);
-		
-	}
-	
-	public void sortByDate() {
-		
-		Collections.sort(list, Item.DateComparator);
-		adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
-		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
-        updatedListTask.setAdapter(adapter);		
-	}
-	
-	public void hideDetails() {
-		Item.hideDetails();
-		onResume();
-	}
-	
-	public void showDetails() {
-		Item.showDetails();
-		onResume();
-	}
-	
-	public void noSort(){
-		onResume();
-	}
-	
 	public void addChoicesOnSpinner() {
 		 
 		sortBy = (Spinner) findViewById(R.id.spinner_sort1);
@@ -173,16 +116,6 @@ public class BoughtActivity extends ListActivity  {
 		sortBy.setOnItemSelectedListener(new MyOnItemSelectedListener());
 	}
 	
-	public void onToggleClicked(View view) {
-	    // Is the button now checked?
-	    boolean on = ((ToggleButton) view).isChecked();
-	    
-	    if(on)
-	    	showDetails();
-	    else
-	    	hideDetails();
-	}
-	
 	@Override
     public void onResume(){
     super.onResume();
@@ -193,31 +126,5 @@ public class BoughtActivity extends ListActivity  {
         updatedListTask.setAdapter(adapter);
     }
 	
-	public class MyOnItemSelectedListener implements OnItemSelectedListener {
-	    @Override
-		    public void onItemSelected(AdapterView parent, View view, int pos, long id) {
-	    	
-	    		String choice = parent.getItemAtPosition(pos).toString();
-	    		switch(choice) {
-	    			case "Store":
-	    				sortByStore();
-	    				break;
-	    			case "Date":
-	    				sortByDate();
-	    				break;
-	    			default:
-	    				noSort();
-	    				break;
-	    		}
-	    				
-    			
-		        Toast.makeText(parent.getContext(), "Selected choice : " + choice, Toast.LENGTH_SHORT).show();
-		    
-	    	}
-		 
-		    @Override
-		    public void onNothingSelected(AdapterView parent) {
-		 
-		    }
-		}
+
 }
