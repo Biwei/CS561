@@ -24,6 +24,11 @@
     	    android:text="@string/button_edit_price"
     	    style="?android:attr/borderlessButtonStyle"
     	    android:textSize="12sp" />
+    	
+		<View
+	  		android:layout_width="1dip"
+	  		android:layout_height="fill_parent"
+	  		android:background="?android:attr/dividerVertical" />
 
     	<Button
     	    android:id="@+id/button_delete_bought"
@@ -33,7 +38,12 @@
     	    android:text="@string/button2"
     	    style="?android:attr/borderlessButtonStyle"
     	    android:textSize="12sp" />
-    
+
+		<View
+	  		android:layout_width="1dip"
+	  		android:layout_height="fill_parent"
+	  		android:background="?android:attr/dividerVertical" />
+  	     
     	<Button
     	    android:id="@+id/button_clear"
     	    android:layout_width="wrap_content"
@@ -43,6 +53,11 @@
     	    style="?android:attr/borderlessButtonStyle"
     	    android:textSize="12sp" />
 
+		<View
+	  		android:layout_width="1dip"
+	  		android:layout_height="fill_parent"
+	  		android:background="?android:attr/dividerVertical" />
+  	 
     	<ToggleButton 
     		android:id="@+id/show_details1"
 		    android:layout_width="wrap_content"
@@ -51,11 +66,17 @@
 		    android:textOff="Show Details"
 		    android:layout_weight="0.25"
 		    android:textSize="12sp"
+		    style="?android:attr/borderlessButtonStyle"
 		    android:onClick="onToggleClicked"/>
     	
-     </LinearLayout>
-
-     <RelativeLayout
+	</LinearLayout>
+     
+	<View
+    	android:layout_width="match_parent"
+    	android:layout_height="1dip"
+    	android:background="?android:attr/dividerHorizontal"/>
+    	   	
+	<RelativeLayout
         android:layout_width="match_parent"
         android:paddingLeft="12dip"
         android:layout_height="35dp"
