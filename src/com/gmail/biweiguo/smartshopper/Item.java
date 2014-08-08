@@ -130,6 +130,10 @@ public class Item implements Comparable<Item> {
     	
     	boughtMode = mode;
     }
+    
+    public static String getDefaultString() {
+    	return defaultString;
+    }
    
     @Override
     public String toString() {
