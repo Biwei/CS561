@@ -61,7 +61,7 @@ public class EditPrice extends Activity {
 		float price = Float.valueOf(editPrice.getText().toString());
 		
 		newItem.setPrice(price);
-		MainActivity.db.updatePurchase(newItem);
+		db.updatePurchase(newItem);
         Log.d("bought", "data updated");
         
         //finish();

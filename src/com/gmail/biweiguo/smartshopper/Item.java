@@ -162,7 +162,7 @@ public class Item implements Comparable<Item> {
     	}
     	//for items on bought list, with price information
     	else {
-    		if(!boughtMode) {
+    		if(boughtMode) {
 	    		if(store.equals("wherever")) {
 	    			str = sb.append(itemName).append(" on ").append(dateString).append(" price: $").append(price).toString();
 	    		}
