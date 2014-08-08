@@ -9,6 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
+        android:paddingLeft="6dip" 
+    	android:paddingRight="6dip"
         android:orientation="horizontal"
         android:background="#dbdbdb"
         android:weightSum="1" >
@@ -55,8 +57,9 @@
 
      <RelativeLayout
         android:layout_width="match_parent"
+        android:paddingLeft="12dip"
         android:layout_height="35dp"
-		android:background="#dbdbdb">
+        android:background="#dbdbdb">
 
 		<TextView
 		    android:id="@+id/textview_sort1"

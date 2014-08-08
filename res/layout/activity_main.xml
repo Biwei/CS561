@@ -10,6 +10,7 @@
         android:layout_height="35dp"
         android:paddingLeft="6dip" 
     	android:paddingRight="6dip"
+    	android:background="#dbdbdb"
         android:orientation="horizontal" >
         
 	    <EditText
@@ -25,7 +26,13 @@
 	   	    android:onClick="quickAddButtonPressed"
 	   	    android:text="@string/quick_add"
 	   	    android:textSize="12sp"
+	   	    style="?android:attr/borderlessButtonStyle"
 	   	    android:layout_weight="0.5" />
+	   	
+	   	<View
+    		android:layout_width="1dip"
+    		android:layout_height="fill_parent"
+    		android:background="?android:attr/dividerVertical" />
 	   	
 		<ToggleButton 
     		android:id="@+id/show_details"
@@ -35,54 +42,88 @@
 		    android:textOff="Show Details"
 		    android:layout_weight="0.5"
 		    android:textSize="12sp"
+		    style="?android:attr/borderlessButtonStyle"
 		    android:onClick="onToggleClicked"/>
 	</LinearLayout>
-   
+	
+   	<View
+    	android:layout_width="match_parent"
+    	android:layout_height="1dip"
+    	android:background="?android:attr/dividerHorizontal"/>
+   	
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:orientation="horizontal"
-        android:weightSum="1" >
+        android:paddingLeft="6dip" 
+    	android:paddingRight="6dip"
+    	android:background="#dbdbdb"
+        android:orientation="horizontal" >
 
     	<Button
     	    android:id="@+id/button_add"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:layout_weight="0.25"
+    	    style="?android:attr/borderlessButtonStyle"
     	    android:onClick="addButtonPressed"
     	    android:text="@string/button1"
     	    android:textSize="12sp" />
+    	
+    	<View
+    		android:layout_width="1dip"
+    		android:layout_height="fill_parent"
+    		android:background="?android:attr/dividerVertical" />
 
     	<Button
     	    android:id="@+id/button_delete"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:layout_weight="0.25"
+    	    style="?android:attr/borderlessButtonStyle"
     	    android:text="@string/button2"
     	    android:textSize="12sp" />
+    	
+	   	<View
+    		android:layout_width="1dip"
+    		android:layout_height="fill_parent"
+    		android:background="?android:attr/dividerVertical" />
     
     	<Button
     	    android:id="@+id/button_edit"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:layout_weight="0.25"
+    	    style="?android:attr/borderlessButtonStyle"
     	    android:onClick="editButtonPressed"
     	    android:text="@string/button3"
     	    android:textSize="12sp" />
+    	
+		<View
+    		android:layout_width="1dip"
+    		android:layout_height="fill_parent"
+    		android:background="?android:attr/dividerVertical" />
 
     	<Button
     	    android:id="@+id/button_bought"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:layout_weight="0.25"
+    	    style="?android:attr/borderlessButtonStyle"
     	    android:text="@string/button4"
     	    android:textSize="12sp" />
 
      </LinearLayout>
-    	
+ 
+	<View
+    	android:layout_width="match_parent"
+    	android:layout_height="1dip"
+    	android:background="?android:attr/dividerHorizontal"/>
+       		
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp">
+        android:paddingLeft="12dip"
+        android:layout_height="35dp"
+        android:background="#dbdbdb">
 
 		<TextView
 		    android:id="@+id/textview_sort"
