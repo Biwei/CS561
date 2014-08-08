@@ -307,6 +307,12 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 	
+	public void removeAllHistory() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.execSQL("DELETE from "+ TABLE_BOUGHT);
+		db.close();
+	}
+	
 }
 
 

@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class BoughtActivity extends CommonActivity  {
 	
 	ToggleButton toggle1;
+	private Button clear;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +47,26 @@ public class BoughtActivity extends CommonActivity  {
 	    setPreferences("etatToggle1", toggle1.isChecked(), this);
         
         Button del = (Button) findViewById(R.id.button_delete_bought);
+        clear = (Button)findViewById(R.id.button_clear);
         
         del.setOnClickListener(listenerDel);
-        
+        clear.setOnLongClickListener(listenerClear);
 	}
 
+    OnLongClickListener listenerClear = new OnLongClickListener() {
+
+        @Override
+        public boolean onLongClick(View v) {
+        // TODO Auto-generated method stub
+        db.removeAllHistory();
+        adapter.clear();
+        list = db.getAllPurchases();
+        adapter.notifyDataSetChanged();
+        Toast.makeText(BoughtActivity.this,"Button long click", Toast.LENGTH_SHORT).show();
+        return true;
+        
+        }
+    };
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
