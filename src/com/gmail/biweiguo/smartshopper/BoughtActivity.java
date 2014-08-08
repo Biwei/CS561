@@ -172,6 +172,7 @@ public class BoughtActivity extends CommonActivity  {
 		choiceList.add("None");
 		choiceList.add("Store");
 		choiceList.add("Date");
+		choiceList.add("Price");
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
 			android.R.layout.simple_spinner_item, choiceList);
 		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

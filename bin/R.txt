@@ -424,6 +424,7 @@ int string hide_details 0x7f0a0028
 int string no_sort 0x7f0a002a
 int string quick_add 0x7f0a001b
 int string show_details 0x7f0a0027
+int string sort_by 0x7f0a002b
 int string sort_by_deadline 0x7f0a0029
 int string textview_deadline 0x7f0a0018
 int string textview_item_count 0x7f0a0016

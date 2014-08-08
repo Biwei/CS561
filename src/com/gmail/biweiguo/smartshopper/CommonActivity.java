@@ -144,6 +144,14 @@ public class CommonActivity extends ListActivity {
         updatedListTask.setAdapter(adapter);		
 	}
 	
+	public void sortByPrice() {
+		
+		Collections.sort(list, Item.PriceComparator);
+		adapter = new ArrayAdapter<Item>(this, R.layout.my_listview, list);
+		ListView updatedListTask = (ListView) findViewById(android.R.id.list);
+        updatedListTask.setAdapter(adapter);		
+	}
+	
     public static void setPreferences(String key, Boolean value, Context context)
     {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -174,8 +182,14 @@ public class CommonActivity extends ListActivity {
 	    			case "Date":
 	    				sortByDate();
 	    				break;
-	    			default:
+	    			case "Price":
+	    				sortByPrice();
+	    				break;
+	    			case "None":
 	    				onResume();
+	    				break;
+	    			default:
+	    				//do nothing
 	    				break;
 	    		}
 	    				

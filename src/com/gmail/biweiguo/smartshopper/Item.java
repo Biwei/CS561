@@ -18,7 +18,7 @@ public class Item implements Comparable<Item> {
     private String store;
     private String dateString;
     private Date date;
-    private float price;
+    private double price;
     
     static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 	private static final Date defaultDate = parseDate(defaultString);
@@ -89,11 +89,11 @@ public class Item implements Comparable<Item> {
     }
 */
     
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
     
-    public void setPrice(float price) {
+    public void setPrice(double price) {
     	this.price = price;
     }
     
@@ -217,6 +217,23 @@ public class Item implements Comparable<Item> {
 			//descending order
 			return date1.compareTo(date2);
 
+		}
+
+	};
+	
+	public static Comparator<Item> PriceComparator = new Comparator<Item>() {
+
+		public int compare(Item item1, Item item2) {
+
+			double store1 = item1.getPrice();
+			double store2 = item2.getPrice();
+			//descending order
+			if(store1 < store2)
+				return 1;
+			else if(store1 > store2)
+				return -1;
+			else
+				return 0;			
 		}
 
 	};

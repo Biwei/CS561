@@ -47,7 +47,7 @@ public class DbHelper extends SQLiteOpenHelper {
             + KEY_NAME + " TEXT, "								//column 1
             + KEY_STORE + " TEXT, "								//column 2	
             + KEY_DATE + " TEXT, "								//column 3	
-            + KEY_PRICE + " FLOAT)";							//column 4
+            + KEY_PRICE + " DOUBLE)";							//column 4
     
     public static DbHelper getInstance(Context context) {
 
@@ -228,7 +228,7 @@ public class DbHelper extends SQLiteOpenHelper {
 	    item.setDateString(cursor.getString(3));
 	    Date date = Item.parseDate(item.getDateString());
 	    item.setDate(date);
-	    item.setPrice(cursor.getFloat(cursor.getColumnIndex(KEY_PRICE)));
+	    item.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_PRICE)));
 	    
 	    return item;
 		//Didn't close database because the item may need to be added to the other table.
@@ -265,7 +265,7 @@ public class DbHelper extends SQLiteOpenHelper {
 	    item.setDateString(cursor.getString(3));
 	    Date date = Item.parseDate(item.getDateString());
 	    item.setDate(date);
-	    item.setPrice(cursor.getFloat(4));
+	    item.setPrice(cursor.getDouble(4));
 		
 		itemList.add(item);
 		} while (cursor.moveToNext());

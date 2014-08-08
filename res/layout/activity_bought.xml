@@ -97,8 +97,8 @@
     		android:layout_alignBaseline="@id/textview_sort1"
     		android:layout_toRightOf="@id/textview_sort1"
     		android:paddingTop="8dip"
-    		android:textSize="12sp"
-    		android:drawSelectorOnTop="true" />
+    		android:prompt="@string/sort_by"
+    		android:textSize="12sp"/>
 	 </RelativeLayout>
     	
      <ListView

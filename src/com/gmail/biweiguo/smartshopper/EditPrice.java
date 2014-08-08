@@ -60,7 +60,12 @@ public class EditPrice extends Activity {
         		String store = editStore.getText().toString();			
         		String dateString = editDate.getText().toString();
         		Date date = Item.parseDate(dateString);
-        		float price = Float.valueOf(editPrice.getText().toString());
+        		String priceStr = editPrice.getText().toString();
+        		double price;
+        		if(priceStr.equalsIgnoreCase("")) 
+        			price = 0;
+        		else
+        			price = Double.valueOf(priceStr);
         		
         		newItem.setItemName(name);
         		//newItem.setCount(count);
