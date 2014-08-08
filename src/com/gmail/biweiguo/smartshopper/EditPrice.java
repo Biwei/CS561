@@ -19,6 +19,7 @@ import android.widget.Toast;
 public class EditPrice extends Activity {
 	
 	protected static DbHelper db;
+	EditText editName, editStore, editDate, editPrice;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +31,54 @@ public class EditPrice extends Activity {
 		
 		db = DbHelper.getInstance(this);
 		
+		Item oldItem = new Item();
+		oldItem = db.getPurchase(id);;
+		
 		Button saveButton = (Button)findViewById(R.id.button_save2);
 		Button cancelButton = (Button)findViewById(R.id.button_cancel2);
+		
+		editName = (EditText) findViewById(R.id.textedit_item_name2);
+		editName.setText(oldItem.getItemName());
+		editName.setTextColor(Color.GRAY);
+		
+		editStore = (EditText) findViewById(R.id.textedit_store_name2);
+		editStore.setText(oldItem.getStore());
+		editStore.setTextColor(Color.GRAY);
+		
+		editDate = (EditText) findViewById(R.id.textedit_deadline2);
+		editDate.setText(oldItem.getDateString());
+		editDate.setTextColor(Color.GRAY);
+		
+		editPrice = (EditText) findViewById(R.id.textedit_item_price);
+		
 	     
         saveButton.setOnClickListener(new OnClickListener() {
            
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                //Intent intent=new Intent();
-                editPrice(id);
-                //setResult(RESULT_OK, intent);
+            	Item newItem = new Item();
+            	String name = editName.getText().toString();			
+        		String store = editStore.getText().toString();			
+        		String dateString = editDate.getText().toString();
+        		Date date = Item.parseDate(dateString);
+        		float price = Float.valueOf(editPrice.getText().toString());
+        		
+        		newItem.setItemName(name);
+        		//newItem.setCount(count);
+        		newItem.setStore(store);
+        		newItem.setDateString(dateString);
+        		newItem.setDate(date);
+        		newItem.setId(id);
+        		newItem.setPrice(price);
+        		newItem.setDefault();
+        		
+        		if (name.equalsIgnoreCase("")) {
+                    Toast.makeText(getApplicationContext(), "enter the item name at least!!",
+                            Toast.LENGTH_LONG).show();
+                } 
+                else {
+                    db.updatePurchase(newItem);
+                    Log.d("bought", "data updated");
+                }
                 finish();
                
             }
@@ -52,20 +91,5 @@ public class EditPrice extends Activity {
         });
 	}
 	
-	public void editPrice(int id) {
-		
-		Item newItem = new Item();
-		newItem = db.getPurchase(id);
-		
-		EditText editPrice = (EditText) findViewById(R.id.textedit_item_price);
-		float price = Float.valueOf(editPrice.getText().toString());
-		
-		newItem.setPrice(price);
-		db.updatePurchase(newItem);
-        Log.d("bought", "data updated");
-        
-        //finish();
-	}
-
 	
 }
