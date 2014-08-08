@@ -1,27 +1,21 @@
 package com.gmail.biweiguo.smartshopper;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import android.support.v7.app.ActionBarActivity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 public class BoughtActivity extends CommonActivity  {
 	
