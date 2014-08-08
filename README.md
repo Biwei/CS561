@@ -15,7 +15,7 @@ It has the following features:
 	Save purchased items to a purchase record list
 	
 	Keeping track of price of each item
-		
+	
 Things to add:
 
 	Guard against program crashing due to user entering invalid date format
@@ -27,7 +27,7 @@ Things to add:
 	Optimise the display of list items when showing details, possibly switch into grid-view
 	
 	A user manual
-		
+	
 This work is available under the "MIT License". Please see the file COPYING in this distribution for license terms.
 
 Contact: biweiguo@gmail.com
