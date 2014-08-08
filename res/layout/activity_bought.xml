@@ -74,7 +74,7 @@
 	<View
     	android:layout_width="match_parent"
     	android:layout_height="1dip"
-    	android:background="?android:attr/dividerHorizontal"/>
+    	android:background="?android:attr/dividerVertical"/>
     	   	
 	<RelativeLayout
         android:layout_width="match_parent"
@@ -87,7 +87,8 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:text="Sort By"
-		    android:textSize="12sp" />
+		    android:paddingTop="8dip"
+		    android:textSize="14sp" />
     	
     	<Spinner
     	    android:id="@+id/spinner_sort1"
@@ -95,6 +96,7 @@
     		android:layout_height="wrap_content"
     		android:layout_alignBaseline="@id/textview_sort1"
     		android:layout_toRightOf="@id/textview_sort1"
+    		android:paddingTop="8dip"
     		android:textSize="12sp"
     		android:drawSelectorOnTop="true" />
 	 </RelativeLayout>

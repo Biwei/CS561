@@ -32,17 +32,21 @@ public class AddItem extends Activity {
 		db = DbHelper.getInstance(this);
 		
 		Button addButton = (Button)findViewById(R.id.button_add);
+		Button cancelButton = (Button)findViewById(R.id.button_cancel);
 	     
         addButton.setOnClickListener(new OnClickListener() {
            
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                //Intent intent=new Intent();
                 addItem(v);
-                //setResult(RESULT_OK, intent);
-                finish();
-               
+                finish();            
             }
+        });
+        
+        cancelButton.setOnClickListener(new OnClickListener() {
+        	
+        	public void onClick(View v) {      		
+        		finish();
+        	}
         });
 	}
 	

@@ -33,7 +33,7 @@
     android:id="@+id/linearLayout_store_name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/linearLayout_item_name"       
+    android:layout_below="@id/linearLayout_item_name"       
     >
     
         <TextView
@@ -55,7 +55,7 @@
     android:id="@+id/linearLayout_deadline"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/linearLayout_store_name"       
+    android:layout_below="@id/linearLayout_store_name"       
     >
     
         <TextView
@@ -70,17 +70,59 @@
             android:inputType="date"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:hint="MM/dd/yyyy"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout_deadline"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
-
-        android:text="@string/button_add" />
+	<RelativeLayout
+	    android:id="@+id/save_cancel_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:paddingTop="40dp"
+        android:layout_below="@id/linearLayout_deadline">
+       
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:background="?android:attr/dividerVertical"
+            android:layout_alignParentTop="true"/>
+        
+        <View
+            android:id="@+id/vertical_divider"
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="4dip"
+            android:layout_marginTop="4dip"
+            android:background="?android:attr/dividerVertical" 
+            android:layout_centerHorizontal="true"/>
+        
+		<Button
+            android:id="@+id/button_add"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/button_add"
+            android:layout_toLeftOf="@id/vertical_divider" />	
+                    
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/vertical_divider"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_alignParentBottom="true"
+            android:text="@string/button_cancel" />
+        
+            
+    </RelativeLayout>
 
 </RelativeLayout>
