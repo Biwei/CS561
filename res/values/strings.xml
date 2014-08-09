@@ -33,5 +33,6 @@
     <string name="no_sort">No Sort</string>
     <string name="sort_by">Sort By</string>
     <string name="title_activity_main">Shopping List</string>
+    <string name="textview_date">Purchase Date</string>
 
 </resources>

@@ -63,7 +63,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"            
-            android:text="@string/textview_deadline" />
+            android:text="@string/textview_date" />
         
        <EditText
             android:id="@+id/textedit_deadline2"
