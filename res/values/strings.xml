@@ -32,5 +32,6 @@
     <string name="sort_by_deadline">Sort By Deadline</string>
     <string name="no_sort">No Sort</string>
     <string name="sort_by">Sort By</string>
+    <string name="title_activity_main">Shopping List</string>
 
 </resources>

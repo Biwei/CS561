@@ -435,6 +435,7 @@ int string title_activity_add_item 0x7f0a0014
 int string title_activity_bought 0x7f0a001f
 int string title_activity_edit_item 0x7f0a0022
 int string title_activity_edit_price 0x7f0a0025
+int string title_activity_main 0x7f0a002c
 int style AppBaseTheme 0x7f0b008b
 int style AppTheme 0x7f0b008c
 int style TextAppearance_AppCompat_Base_CompactMenu_Dialog 0x7f0b0063
