@@ -14,7 +14,7 @@ It has the following features:
 	
 * Save purchased items to a purchase record list
 	
-* Keeping track of price of each item
+* Keep track of price of each item
 	
 Things to add:
 
