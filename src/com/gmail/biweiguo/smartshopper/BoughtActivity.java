@@ -9,6 +9,7 @@ import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -43,7 +44,7 @@ public class BoughtActivity extends CommonActivity  {
         Button del = (Button) findViewById(R.id.button_delete_bought);
         clear = (Button)findViewById(R.id.button_clear);
         
-        del.setOnClickListener(listenerDel);
+        del.setOnClickListener(listenerDelBought);
         clear.setOnLongClickListener(listenerClear);
 	}
 
@@ -59,6 +60,27 @@ public class BoughtActivity extends CommonActivity  {
         Toast.makeText(BoughtActivity.this,"Button long click", Toast.LENGTH_SHORT).show();
         return true;
         
+        }
+    };
+    
+    OnClickListener listenerDelBought = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            /** Getting the checked items from the listview */
+            SparseBooleanArray checkedItemPositions = getListView().getCheckedItemPositions();
+            int itemCount = getListView().getCount();
+            
+
+            for(int i=itemCount-1; i >= 0; i--){
+                if(checkedItemPositions.get(i)){
+                	Item selected = new Item ();
+                	selected = list.get(i);
+                    adapter.remove(selected);
+                    db.removeBoughtItem(selected.getId());
+                }
+            }
+            checkedItemPositions.clear();
+            adapter.notifyDataSetChanged();
         }
     };
 
