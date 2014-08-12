@@ -1,3 +1,10 @@
+/*************************************************************
+* Copyright (c) 2014 Biwei Guo
+* [This program is licensed under the "MIT License"]
+* Please see the file COPYING in the source
+* distribution of this software for license terms.
+**************************************************************/
+
 package com.gmail.biweiguo.smartshopper;
 
 import java.util.ArrayList;
@@ -83,22 +90,6 @@ public class CommonActivity extends ListActivity {
             adapter.notifyDataSetChanged();
         }
     };
-    
-  /**  
-	public void onToggleClicked(View view) {
-	    // Is the button now checked?
-	    boolean on = ((ToggleButton) view).isChecked();
-	    
-	    if(on) {
-	    	Item.showDetails();
-	    }
-	    else {
-	    	Item.hideDetails();
-	    }
-	    
-	    adapter.notifyDataSetChanged();
-	}
-	**/
 
 	public void sortByNothing() {
 		

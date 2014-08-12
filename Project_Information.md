@@ -38,7 +38,7 @@ https://github.com/Biwei/SmartShopper
 ####References:
 https://developer.android.com
 
-http://www.developerfeed.com/
+http://www.developerfeed.com/building-todo-list-app-android-using-sqlite
 
 http://stackoverflow.com/
 
