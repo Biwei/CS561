@@ -30,4 +30,6 @@ Things to add:
 	
 This work is available under the "MIT License". Please see the file COPYING in this distribution for license terms.
 
+More information can be found in the file [Project Information](https://github.com/Biwei/SmartShopper/blob/master/Project_Information.md)
+
 Contact: biweiguo@gmail.com
